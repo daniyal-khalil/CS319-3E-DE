@@ -5,9 +5,9 @@
 The game will not require any additional installation it will come in an executable format, the game will be made using Java for backend design, and JavaFX Library for the GUI. Any additional used library or open-source codes will be listed here.
 
 # Group Members
-Daniyal Khalil
-Leyla Ismayilova
-Leyla Hashimli
-Emil Alizadah
-Zulfugar Verdiyev
+Daniyal Khalil  
+Leyla Ismayilova  
+Leyla Hashimli  
+Emil Alizadah  
+Zulfugar Verdiyev  
 
