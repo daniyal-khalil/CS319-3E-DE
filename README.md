@@ -13,3 +13,6 @@ Leyla Hashimli
 Emil Alizadah  
 Zulfugar Verdiyev  
 
+
+Analysis Report
+https://docs.google.com/document/d/1lkfZzIYblgk3loRwiIJVlVkAgedg97gT0UPMmrYD6KQ/edit?usp=sharing
