@@ -10,7 +10,7 @@ The game will not require any additional installation it will come in an executa
 Daniyal Khalil  
 Leyla Ismayilova  
 Leyla Hashimli  
-Emil Alizadah  
+Emil Alizadeh  
 Zulfugar Verdiyev  
 
 
