@@ -2,38 +2,48 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="299.0" layoutY="44.0" prefHeight="89.0" prefWidth="353.0" text="       New Game" textFill="#946060" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true" >
-         <font>
-            <Font name="Haettenschweiler" size="72.0" />
-         </font>
-      </Label>
-      <Pane layoutX="606.0" layoutY="178.0" prefHeight="398.0" prefWidth="353.0" style="-fx-background-color: #666666;" />
-      <Button layoutX="80.0" layoutY="197.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="380.0" text="Start Game" fx:id="newGame" onAction = "#goingToPlay">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Button>
-      <Button layoutX="81.0" layoutY="295.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="380.0" text="Mode" fx:id="modes" onAction = "#goingToModes">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Button>
-      <Button layoutX="80.0" layoutY="392.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="380.0" text="Store" fx:id="store" onAction="#goingToStore">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Button>
-      <Button layoutX="80.0" layoutY="487.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="380.0" text="Settings" fx:id="settings" onAction="#popSettings">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Button>
-      <Button layoutX="940.0" layoutY="25.0" mnemonicParsing="false" text="back"/>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+      <ImageView fitHeight="702.0" fitWidth="1127.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/backgroun.jpg" />
+         </image>
+      </ImageView>
+        <Label alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="299.0" layoutY="44.0" prefHeight="89.0" prefWidth="353.0" text="       New Game" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+            <font>
+                <Font name="Haettenschweiler" size="72.0" />
+            </font>
+        </Label>
+        <Button fx:id="newGame" layoutX="80.0" layoutY="197.0" mnemonicParsing="false" onAction="#goingToPlay" prefHeight="75.0" prefWidth="380.0" text="Start Game" textFill="#0e151e">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Button>
+        <Button fx:id="modes" layoutX="81.0" layoutY="295.0" mnemonicParsing="false" onAction="#goingToModes" prefHeight="75.0" prefWidth="380.0" text="Mode" textFill="#0e151e">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Button>
+        <Button fx:id="store" layoutX="80.0" layoutY="392.0" mnemonicParsing="false" onAction="#goingToStore" prefHeight="75.0" prefWidth="380.0" text="Store" textFill="#0e151e">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Button>
+        <Button fx:id="settings" layoutX="80.0" layoutY="487.0" mnemonicParsing="false" onAction="#popSettings" prefHeight="75.0" prefWidth="380.0" text="Settings" textFill="#0e151e">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Button>
+        <Button layoutX="940.0" layoutY="25.0" mnemonicParsing="false" text="back" />
+      <ImageView fitHeight="429.0" fitWidth="383.0" layoutX="584.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/userMenu.jpg" />
+         </image>
+      </ImageView>
+    </children>
 </AnchorPane>
