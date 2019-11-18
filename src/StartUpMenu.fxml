@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Button layoutX="600.0" layoutY="380.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="313.0" text="Previous Profile" textFill="#52545e">
+      <Button layoutX="600.0" layoutY="380.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="313.0" text="Previous Profile" textFill="#52545e" fx:id="loadProfile" onAction="#onLoadProfile">
          <font>
             <Font name="Berlin Sans FB" size="37.0" />
          </font>
@@ -29,7 +29,7 @@
          </graphic>
 
       </Button>
-      <Button layoutX="600.0" layoutY="250.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="313.0" text="New Profile" textFill="#52545e">
+      <Button layoutX="600.0" layoutY="250.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="313.0" text="New Profile" textFill="#52545e" fx:id="createProfile" onAction="#onCreateProfile">
          <font>
             <Font name="Berlin Sans FB" size="37.0" />
          </font>
