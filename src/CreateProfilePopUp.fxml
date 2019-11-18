@@ -20,7 +20,7 @@
             <Font name="Berlin Sans FB" size="32.0" />
          </font>
       </Label>
-      <Button fx:id="" layoutX="656.0" layoutY="296.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" text="Enter" onAction="#enterName">
+      <Button fx:id="nameEntered" layoutX="656.0" layoutY="296.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" text="Enter" onAction="#enterName">
          <font>
             <Font name="Berlin Sans FB" size="16.0" />
          </font>
