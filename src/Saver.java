@@ -27,6 +27,38 @@ public class Saver
         String fileAsString = sb.toString();
         return fileAsString;
     }
+    
+    public ArrayList<String> getList()
+    {
+        ArrayList<String> list = new ArrayList<String>();
+        try
+        {
+            String text = readFile(fileName);
+            for(int i = 0; i < text.length(); i++)
+            {
+              char ch = text.charAt(i);
+              if(Character.isDigit(ch) || (ch == '+'))
+              {
+                text = text.substring(0, i) + text.substring(i + 1, text.length());
+                i--;
+              }
+            }
+            int j = 0;
+            for(int i = 0; i < text.length(); i++)
+            {
+              if(text.charAt(i) == '\n')
+              {
+                String str = text.substring(j, i);
+                list.add(str);
+                j = i + 1;
+              }
+            }
+        } catch(IOException e)
+        {
+            
+        }
+        return list;
+    }
 
     public void deleteAll()
     {
