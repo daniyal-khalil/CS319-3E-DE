@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Shop">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1024.0">
          <children>
@@ -24,7 +24,7 @@
                </children>
             </Pane>
             <BorderPane layoutX="768.0" layoutY="239.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="236.0" prefWidth="236.0" style="-fx-background-color: #CCD1D1;" />
-            <Button layoutX="956.0" layoutY="25.0" mnemonicParsing="false" text="back" />
+            <Button layoutX="956.0" layoutY="25.0" mnemonicParsing="false" text="back" fx:id="backFromStore" onAction="#fromStoreToUserMenu" />
          </children>
       </AnchorPane>
    </children>
