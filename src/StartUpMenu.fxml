@@ -8,31 +8,36 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <children>
-      <Button layoutX="600.0" layoutY="380.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="313.0" text="Previous Profile" textFill="#52545e" fx:id="loadProfile" onAction="#onLoadProfile">
-         <font>
-            <Font name="Berlin Sans FB" size="37.0" />
-         </font>
-      </Button>
-      <Label layoutX="140.0" prefHeight="126.0" prefWidth="744.0" text="The Defenders: Cinematic Edition" textFill="#757e86de">
-         <font>
-            <Font name="Haettenschweiler" size="74.0" />
-         </font>
-      </Label>
-      <Button accessibleRole="IMAGE_VIEW" layoutX="30.0" layoutY="36.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="18.0" textFill="WHITE">
-         <graphic>
-            <ImageView fitHeight="53.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-               <image>
-                  <Image url="@icons/speaker.png" />
-               </image>
-            </ImageView>
-         </graphic>
+    <children>
+        <ImageView fitHeight="818.0" fitWidth="1120.0" layoutX="-86.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/backgroun.jpg" />
+            </image>
+        </ImageView>
+        <Button fx:id="loadProfile" layoutX="600.0" layoutY="380.0" mnemonicParsing="false" onAction="#onLoadProfile" prefHeight="86.0" prefWidth="313.0" text="Previous Profile" textFill="#52545e">
+            <font>
+                <Font name="Berlin Sans FB" size="37.0" />
+            </font>
+        </Button>
+        <Label layoutX="140.0" prefHeight="126.0" prefWidth="744.0" text="The Defenders: Cinematic Edition" textFill="WHITE">
+            <font>
+                <Font name="Haettenschweiler" size="74.0" />
+            </font>
+        </Label>
+        <Button accessibleRole="IMAGE_VIEW" layoutX="30.0" layoutY="36.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="18.0" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="53.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                    <image>
+                        <Image url="@icons/speaker.png" />
+                    </image>
+                </ImageView>
+            </graphic>
 
-      </Button>
-      <Button layoutX="600.0" layoutY="250.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="313.0" text="New Profile" textFill="#52545e" fx:id="createProfile" onAction="#onCreateProfile">
-         <font>
-            <Font name="Berlin Sans FB" size="37.0" />
-         </font>
-      </Button>
-   </children>
+        </Button>
+        <Button fx:id="createProfile" layoutX="600.0" layoutY="250.0" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="86.0" prefWidth="313.0" text="New Profile" textFill="#52545e">
+            <font>
+                <Font name="Berlin Sans FB" size="37.0" />
+            </font>
+        </Button>
+    </children>
 </AnchorPane>

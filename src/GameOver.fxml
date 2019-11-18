@@ -27,7 +27,7 @@
                 <Font name="Haettenschweiler" size="24.0" />
             </font>
         </Label>
-        <Button layoutX="227.0" layoutY="161.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="Exit Game" fx:id="exitApp" onAction="#exittingApp">
+        <Button layoutX="227.0" layoutY="161.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" text="Exit Game" fx:id="exitApp" >
             <font>
                 <Font size="24.0" />
             </font>
