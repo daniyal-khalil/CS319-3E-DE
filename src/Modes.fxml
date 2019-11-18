@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Modes">
+<AnchorPane prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="425.0" layoutY="50.0" prefHeight="77.0" prefWidth="201.0" text="Modes" textFill="#946060" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
          <font>
@@ -33,6 +33,6 @@
             <Font size="19.0" />
          </font>
       </CheckBox>
-      <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" text="back" />
+      <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" text="back" fx:id="backFromModes" onAction="#goBackToUserMenu" />
    </children>
 </AnchorPane>
