@@ -57,24 +57,6 @@ public class Saver
         return true;
     }
 
-    public int getID(String str)
-    {
-        try {
-            int j = 0;
-            for (; !java.lang.Character.isDigit(str.charAt(j)); j++)
-            if (java.lang.Character.isDigit(str.charAt(j))) {
-                int i = j;
-                for (; java.lang.Character.isDigit(str.charAt(i)) && (str.charAt(i) != '+'); i++) ;
-                int id = Integer.getInteger(str.substring(0, i));
-                return id;
-            }
-        } catch (NullPointerException e)
-        {
-
-        }
-        return -1;
-    }
-
     public String getByID(int id) {
         BufferedReader reader;
         String userr = id + "+<unidentified>";
