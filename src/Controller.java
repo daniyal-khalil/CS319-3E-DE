@@ -93,6 +93,9 @@ public class Controller {
     @FXML
     private ImageView characterView;
 
+    @FXML
+    private Button backFromCreate, backFromLoad;
+
     boolean running, goNorth, goSouth, goEast, goWest, shoot;
 
 
@@ -153,14 +156,24 @@ public class Controller {
         System.exit(0);
     }
 
-    public void goingReplayGame(javafx.event.ActionEvent actionEvent) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("UserMenu.fxml"));
-        Stage window = new Stage();
-        System.out.println("Meow");
-        Scene scene = new Scene(root);
-        window.setScene(scene);
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.show();
+
+    public void fromLoadToStart(javafx.event.ActionEvent actionEvent) throws Exception {
+        System.out.println("go to start");
+        Stage window;
+        window = (Stage) backFromLoad.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
+
+        window.setScene(new Scene(root));
+    }
+
+    public void fromCreatToStart(javafx.event.ActionEvent actionEvent) throws Exception {
+        System.out.println("go to start");
+        Stage window;
+        window = (Stage) backFromCreate.getScene().getWindow();
+        System.out.println("get the window");
+        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
+        System.out.println("get the root");
+        window.setScene(new Scene(root));
     }
 
     public void goingToPlay(ActionEvent event)throws Exception{
@@ -188,7 +201,6 @@ public class Controller {
         Group dungeon = new Group(gameBack, hero, weapon);
         root = new Pane();
         root.getChildren().add(dungeon);
-        GameOver = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
 
 
         weapon.setVisible(false);
@@ -306,9 +318,7 @@ public class Controller {
             }
         };
         timer.start();
-        if (collision()) {
-            stage.setScene(new Scene(GameOver));
-        }
+
 
     }
 
@@ -704,11 +714,28 @@ public class Controller {
                 return false;
             }
             if (((heroX <= enemy.get(i).getX() + 10) && heroX >= enemy.get(i).getX() ) && (heroY >= enemy.get(i).getY() && (heroY <= enemy.get(i).getY() + 10))) {
-                System.out.println("GameOVER");
+                root.getChildren().removeAll();
+                for (int j = 0; j < enemy.size(); j++)
+                {
+                    enemy.remove(j);
+                    enemyDirection.set(j,"");
+                }
+                gameOver();
                 return true;
             }
         }
         return false;
+    }
+
+
+    public void gameOver() {
+        try {
+            GameOver = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        gameStage.setScene(new Scene(GameOver));
+
     }
 
 
