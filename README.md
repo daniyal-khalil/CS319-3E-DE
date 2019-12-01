@@ -14,5 +14,14 @@ Emil Alizadeh
 Zulfugar Verdiyev  
 
 
-Analysis Report
+Analysis Report First Iteration:
 https://docs.google.com/document/d/1lkfZzIYblgk3loRwiIJVlVkAgedg97gT0UPMmrYD6KQ/edit?usp=sharing
+
+Design Report Second Iteration:
+
+Final Report:
+https://docs.google.com/document/d/1bVH_Ot1iRKuj6WTQpIYzEroN2WzS9zsMIFZNqiABpc0/edit?usp=sharing
+
+Analysis Report Second Iteration:
+https://docs.google.com/document/d/1Jb6U8fOb4exD1n6myIhPz7088Wj0eLQ4JFLazad10-M/edit?usp=sharing
+
