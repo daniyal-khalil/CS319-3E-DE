@@ -18,6 +18,7 @@ Analysis Report First Iteration:
 https://docs.google.com/document/d/1lkfZzIYblgk3loRwiIJVlVkAgedg97gT0UPMmrYD6KQ/edit?usp=sharing
 
 Design Report Second Iteration:
+https://docs.google.com/document/d/1k0lWh2rr8BlrZcuI5jSN4BapS4bbvsfpBwacd3D97qE/edit?usp=sharing
 
 Final Report:
 https://docs.google.com/document/d/1bVH_Ot1iRKuj6WTQpIYzEroN2WzS9zsMIFZNqiABpc0/edit?usp=sharing
