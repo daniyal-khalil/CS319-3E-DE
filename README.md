@@ -17,12 +17,15 @@ Zulfugar Verdiyev
 Analysis Report First Iteration:
 https://docs.google.com/document/d/1lkfZzIYblgk3loRwiIJVlVkAgedg97gT0UPMmrYD6KQ/edit?usp=sharing
 
-Design Report Second Iteration:
+Design Report First Iteration:
 https://docs.google.com/document/d/1k0lWh2rr8BlrZcuI5jSN4BapS4bbvsfpBwacd3D97qE/edit?usp=sharing
 
-Final Report:
+Final Report First Iteration:
 https://docs.google.com/document/d/1bVH_Ot1iRKuj6WTQpIYzEroN2WzS9zsMIFZNqiABpc0/edit?usp=sharing
 
 Analysis Report Second Iteration:
 https://docs.google.com/document/d/1Jb6U8fOb4exD1n6myIhPz7088Wj0eLQ4JFLazad10-M/edit?usp=sharing
+
+Design Report Second Iteration:
+https://docs.google.com/document/d/13TlxejL3Cv-P9CcOB4UkpCOwWDs_mT81kcsCc-jxkQs/edit?usp=sharing
 
