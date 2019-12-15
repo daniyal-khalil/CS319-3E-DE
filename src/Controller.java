@@ -93,9 +93,6 @@ public class Controller {
     @FXML
     private ImageView characterView;
 
-    @FXML
-    private Button backFromCreate, backFromLoad;
-
     boolean running, goNorth, goSouth, goEast, goWest, shoot;
 
 
@@ -142,13 +139,13 @@ public class Controller {
 
         window.setScene(new Scene(root));
     }
-
+/*
     public void exittingApp(javafx.event.ActionEvent actionEvent) throws Exception {
         Stage window;
         window = (Stage) exitApp.getScene().getWindow();
         window.setOnCloseRequest(e -> handleExit());
     }
-
+*/
 
     private void handleExit()
     {
@@ -156,24 +153,14 @@ public class Controller {
         System.exit(0);
     }
 
-
-    public void fromLoadToStart(javafx.event.ActionEvent actionEvent) throws Exception {
-        System.out.println("go to start");
-        Stage window;
-        window = (Stage) backFromLoad.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
-
-        window.setScene(new Scene(root));
-    }
-
-    public void fromCreatToStart(javafx.event.ActionEvent actionEvent) throws Exception {
-        System.out.println("go to start");
-        Stage window;
-        window = (Stage) backFromCreate.getScene().getWindow();
-        System.out.println("get the window");
-        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
-        System.out.println("get the root");
-        window.setScene(new Scene(root));
+    public void goingReplayGame(javafx.event.ActionEvent actionEvent) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("UserMenu.fxml"));
+        Stage window = new Stage();
+        System.out.println("Meow");
+        Scene scene = new Scene(root);
+        window.setScene(scene);
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.show();
     }
 
     public void goingToPlay(ActionEvent event)throws Exception{
@@ -201,6 +188,7 @@ public class Controller {
         Group dungeon = new Group(gameBack, hero, weapon);
         root = new Pane();
         root.getChildren().add(dungeon);
+        GameOver = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
 
 
         weapon.setVisible(false);
@@ -318,7 +306,9 @@ public class Controller {
             }
         };
         timer.start();
-
+        if (collision()) {
+            stage.setScene(new Scene(GameOver));
+        }
 
     }
 
@@ -373,10 +363,11 @@ public class Controller {
         Parent root = FXMLLoader.load(getClass().getResource("UserMenu.fxml"));
         String username = createName.getText();
 
-        Saver txtFile = new Saver("src\\sample\\a.txt");
+        Saver txtFile = new Saver("src\\sample\\text.txt");
         int id = (int)(Math.random()  * 10000);
-        txtFile.writeNewUser(username, id);
-        System.out.print(username);
+        txtFile.writeNewUser(new Player(username, 0, new Weapon(1, "shield", 10),
+                                  new Character("Captain", 100), 0, new ArrayList<Weapon>(), new ArrayList<Character>()));
+        //System.out.print(username);
         Stage stage = (Stage) createName.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -714,28 +705,11 @@ public class Controller {
                 return false;
             }
             if (((heroX <= enemy.get(i).getX() + 10) && heroX >= enemy.get(i).getX() ) && (heroY >= enemy.get(i).getY() && (heroY <= enemy.get(i).getY() + 10))) {
-                root.getChildren().removeAll();
-                for (int j = 0; j < enemy.size(); j++)
-                {
-                    enemy.remove(j);
-                    enemyDirection.set(j,"");
-                }
-                gameOver();
+                System.out.println("GameOVER");
                 return true;
             }
         }
         return false;
-    }
-
-
-    public void gameOver() {
-        try {
-            GameOver = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        gameStage.setScene(new Scene(GameOver));
-
     }
 
 

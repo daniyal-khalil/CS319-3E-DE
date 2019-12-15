@@ -8,7 +8,6 @@ public class Player
     private String name;
     private int coins;
     private Weapon currentWeapon;
-    private int id;
     private Character currentCharacter;
     private int highScore;
     private ArrayList<Weapon> weapons;
@@ -20,20 +19,18 @@ public class Player
         this.name = "undefined";
         this.coins = 0;
         this.currentWeapon = new Weapon();
-        this.id = -1;
         this.currentCharacter = new Character();
         this.highScore = 0;
         this.weapons = new ArrayList<Weapon>();
         this.characters = new ArrayList<Character>();
     }
 
-    public Player(String name, int coins, Weapon currentWeapon, int id, Character currentCharacter,
+    public Player(String name, int coins, Weapon currentWeapon, Character currentCharacter,
                   int highScore, ArrayList<Weapon> weapons, ArrayList<Character> characters)
     {
         this.name = name;
         this.coins = coins;
         this.currentWeapon = currentWeapon;
-        this.id = id;
         this.currentCharacter = currentCharacter;
         this.highScore = highScore;
         this.weapons = weapons;
@@ -68,17 +65,13 @@ public class Player
 
     public void setCurrentWeapon(Weapon currentWeapon)
     {
-        this.currentWeapon = currentWeapon;
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
+        for(int i = 0; i < weapons.size(); i++)
+        {
+            if(weapons.get(i).getName().equals(currentWeapon.getName()))
+            {
+                changeWeapon(i);
+            }
+        }
     }
 
     public Character getCurrentCharacter()
@@ -88,7 +81,13 @@ public class Player
 
     public void setCurrentCharacter(Character currentCharacter)
     {
-        this.currentCharacter = currentCharacter;
+        for(int i = 0; i < characters.size(); i++)
+        {
+            if(characters.get(i).getName().equals(currentCharacter.getName()))
+            {
+                changeCharacter(i);
+            }
+        }
     }
 
     public void setHighScore(int highScore)
@@ -99,6 +98,26 @@ public class Player
     public int getHighScore()
     {
         return highScore;
+    }
+    
+    public ArrayList<Character> getCharacters()
+    {
+        return characters;
+    }
+    
+    public void setCharacters(ArrayList<Character> characters)
+    {
+        this.characters = characters;
+    }
+    
+    public ArrayList<Weapon> getWeapons()
+    {
+        return weapons;
+    }
+    
+    public void setWeapons(ArrayList<Weapon> weapons)
+    {
+        this.weapons = weapons;
     }
 
     public boolean addWeapon(Weapon weapon)
@@ -125,5 +144,27 @@ public class Player
         }
         characters.add(character);
         return true;
+    }
+    
+    private void changeWeapon(int index)
+    {
+        if(0 <= index && index < weapons.size())
+        {
+            Weapon temp = currentWeapon;
+            currentWeapon = weapons.get(index);
+            weapons.remove(index);
+            weapons.add(index, temp);
+        }
+    }
+    
+    private void changeCharacter(int index)
+    {
+        if(0 <= index && index < characters.size())
+        {
+            Character temp = currentCharacter;
+            currentCharacter = characters.get(index);
+            characters.remove(index);
+            characters.add(index, temp);
+        }
     }
 }
