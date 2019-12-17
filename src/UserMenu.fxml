@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserMenuController">
     <children>
-      <ImageView fitHeight="702.0" fitWidth="1127.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/backgroun.jpg" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="702.0" fitWidth="1127.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/backgroun.jpg" />
+            </image>
+        </ImageView>
         <Label alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="299.0" layoutY="44.0" prefHeight="89.0" prefWidth="353.0" text="       New Game" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
             <font>
                 <Font name="Haettenschweiler" size="72.0" />
             </font>
         </Label>
-        <Button fx:id="newGame" layoutX="80.0" layoutY="197.0" mnemonicParsing="false" onAction="#goingToPlay" prefHeight="75.0" prefWidth="380.0" text="Start Game" textFill="#0e151e">
+        <Button fx:id="newGame" layoutX="80.0" layoutY="197.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="380.0" text="Start Game" textFill="#0e151e">
             <font>
                 <Font size="36.0" />
             </font>
@@ -40,10 +40,10 @@
             </font>
         </Button>
         <Button layoutX="940.0" layoutY="25.0" mnemonicParsing="false" text="back" />
-      <ImageView fitHeight="429.0" fitWidth="383.0" layoutX="584.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/userMenu.jpg" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="429.0" fitWidth="383.0" layoutX="584.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/userMenu.jpg" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>
