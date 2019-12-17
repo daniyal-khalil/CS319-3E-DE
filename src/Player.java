@@ -63,15 +63,17 @@ public class Player
         return currentWeapon;
     }
 
-    public void setCurrentWeapon(Weapon currentWeapon)
+    public boolean setCurrentWeapon(Weapon currentWeapon)
     {
         for(int i = 0; i < weapons.size(); i++)
         {
             if(weapons.get(i).getName().equals(currentWeapon.getName()))
             {
                 changeWeapon(i);
+                return true;
             }
         }
+        return false;
     }
 
     public Character getCurrentCharacter()
@@ -79,15 +81,17 @@ public class Player
         return currentCharacter;
     }
 
-    public void setCurrentCharacter(Character currentCharacter)
+    public boolean setCurrentCharacter(Character currentCharacter)
     {
         for(int i = 0; i < characters.size(); i++)
         {
             if(characters.get(i).getName().equals(currentCharacter.getName()))
             {
                 changeCharacter(i);
+                return true;
             }
         }
+        return false;
     }
 
     public void setHighScore(int highScore)
