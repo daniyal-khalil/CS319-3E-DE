@@ -41,6 +41,8 @@ public class GameController {
     private Pane gameOver;
 
 
+
+
     @FXML
     private TableView<Player> listedUsers;
     @FXML
@@ -229,6 +231,7 @@ public class GameController {
 //        Parent root = FXMLLoader.load(getClass().getResource("GamePlay.fxml"));
 //
 //        window.setScene(new Scene(root));
+        score = 0;
         gameOver = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
         shootDirection = "down";
         direction = "down";
@@ -255,7 +258,7 @@ public class GameController {
         dungeon.minHeight(500.0);
         dungeon.maxHeight(500.0);
         Label topLabel = new Label();
-        topLabel.setText("top");
+        topLabel.setText("Score: " + score);
         Label bottomLabel = new Label();
         bottomLabel.setText("bottom");
         HBox topBox = new HBox();
@@ -364,6 +367,7 @@ public class GameController {
                 int dx = 0, dy = 0;
                 spawnEnemies();;
                 collision();
+                topLabel.setText("Score: " + score);
                 over = collision();
 
                 followTheUser();
@@ -380,23 +384,30 @@ public class GameController {
                     }
                 }
                 if (goEast)  {
-                    
-                    dungeon.setTranslateX(dungeon.getTranslateX() - 3);
-                    hero.setTranslateX(hero.getTranslateX() + 3);
 
+                    if (heroX < 1550 && heroX > 500)
+                        dungeon.setTranslateX(dungeon.getTranslateX() - 3);
+                    if (heroX < 2000) {
+                        hero.setTranslateX(hero.getTranslateX() + 3);
+                        heroX += 3;
+                    }
                     System.out.println("HeroX" + heroX);
                     System.out.println("Enemy" + enemy.get(0).getLayoutX());
                     System.out.println("Weapon" + weapon.getLayoutX());
-                    heroX += 3;
+
                 }
                 if (goWest)  {
-                    hero.setTranslateX(hero.getTranslateX() - 3);
 
-                   dungeon.setTranslateX(dungeon.getTranslateX() + 3 );
-                   heroX -= 3;
+                    if (heroX > 0 ) {
+                        hero.setTranslateX(hero.getTranslateX() - 3);
+                        heroX -= 3;
+                    }
+                    if (heroX > 500 && heroX < 1500)
+                        dungeon.setTranslateX(dungeon.getTranslateX() + 3 );
+
                 }
 //                if (running) { dx *= 3; dy *= 3; }
-                if (shoot)  {
+                if (shoot && weapon.isVisible())  {
                     if (shootDirection.equals("up"))
                         weapon.setLayoutY(weapon.getLayoutY()-9);
                     if (shootDirection.equals("down"))
@@ -535,12 +546,15 @@ public class GameController {
 
         for (int i = 0; i < enemy.size(); i++) {
             if ((weapon.getLayoutX() <= enemy.get(i).getLayoutX() + 70 && weapon.getLayoutX() >= enemy.get(i).getLayoutX() ) && (weapon.getLayoutY() >= enemy.get(i).getLayoutY() && (weapon.getLayoutY() <= enemy.get(i).getLayoutY() + 100)) ) {
-                dungeon.getChildren().remove(enemy.get(i));
-                enemy.remove(i);
-                System.out.println("YAHAN");
-                enemyDirection.set(i, "");
-                score++;
-                return false;
+                if (weapon.isVisible()) {
+                    dungeon.getChildren().remove(enemy.get(i));
+                    enemy.remove(i);
+                    System.out.println("YAHAN");
+                    enemyDirection.set(i, "");
+                    score++;
+                    weapon.setVisible(false);
+                    return false;
+                }
             }
             if (((heroX <= enemy.get(i).getLayoutX() + 10) && heroX >= enemy.get(i).getLayoutX() ) && (heroY >= enemy.get(i).getLayoutY() && (heroY <= enemy.get(i).getLayoutY() + 10))) {
                 System.out.println("NYAH");
