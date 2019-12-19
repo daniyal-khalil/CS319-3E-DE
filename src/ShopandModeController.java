@@ -28,6 +28,29 @@ public class ShopandModeController extends UserMenuController
     private Label information;
     @FXML
     private Button buyOrChoose;
+    @FXML
+    private RadioButton marvel;
+    @FXML
+    private ToggleGroup toggleGroup;
+    @FXML
+    private RadioButton dc;
+    @FXML
+    private void initialize(){
+        toggleGroup = new ToggleGroup();
+        marvel.setToggleGroup(toggleGroup);
+        marvel.setSelected(true);
+        dc.setToggleGroup(toggleGroup);
+    }
+    public void onModeSelected(ActionEvent event) throws Exception{
+        RadioButton selectedMode = (RadioButton) toggleGroup.getSelectedToggle();
+        String value = selectedMode.getText();
+        System.out.println(value);
+        Stage window = (Stage) marvel.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("UserMenu.fxml"));
+        window.setScene(new Scene(root));
+        
+        // TODO: return the value of the selected Radio Button
+    }
 
     private ArrayList<String> informationsC;
     private ArrayList<String> informationsW;
