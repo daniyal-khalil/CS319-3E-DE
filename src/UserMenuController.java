@@ -45,10 +45,15 @@ public class UserMenuController {
     ArrayList<String> informationsC;
     ArrayList<String> informationsW;
 
-    public void playGame(ActionEvent actionEvent) throws Exception
-    {
-        Stage window = (Stage) newGame.getScene().getWindow();
-        GameController gameController = new GameController(actionEvent);
+    public void playGame(ActionEvent actionEvent) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GamePanel.fxml"));
+        Parent root = (Parent) loader.load();
+        GameController gameController = new GameController();
+        gameController = loader.getController();
+        System.out.println(player.getName());
+        gameController.setPlayer(player);
+        gameController.goingToPlay(actionEvent);
+
     }
 
 
@@ -63,10 +68,10 @@ public class UserMenuController {
         ((Slider)root.lookup("#sound")).setMin(MIN);
         ((Slider)root.lookup("#sound")).setMax(MAX);
         ((Slider)root.lookup("#sound")).setValue(50);
-   //     ((Slider)root.lookup("#sound")).sliderValueProperty().addListener((ov) -> {
-     //       if (((Slider)root.lookup("#sound")).isTheValueChanging()) {
-       //     }
-       // });
+        //     ((Slider)root.lookup("#sound")).sliderValueProperty().addListener((ov) -> {
+        //       if (((Slider)root.lookup("#sound")).isTheValueChanging()) {
+        //     }
+        // });
 
 //        ((Slider)root.lookup("#sound")).setValue(50);
 //        ((Slider)root.lookup("#sound")).setShowTickMarks(true);
@@ -78,7 +83,7 @@ public class UserMenuController {
 //        ((Slider)root.lookup("#sound")).setBlockIncrement(1f);
 //        ((Slider)root.lookup("#effects")).setMajorTickUnit(25f);
 //        ((Slider)root.lookup("#effects")).setBlockIncrement(1f);
-       // ((Slider)root.lookup("#sound")).setPrefHeight(30);
+        // ((Slider)root.lookup("#sound")).setPrefHeight(30);
 
         ((Slider)root.lookup("#sound")).setOrientation(javafx.geometry.Orientation.HORIZONTAL);
         //slide.setShowTickLabels(true);
@@ -108,6 +113,7 @@ public class UserMenuController {
     public void setPlayer(Player player)
     {
         this.player = player;
+        System.out.println(this.player.getName());
     }
 
 
