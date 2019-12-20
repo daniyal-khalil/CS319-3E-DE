@@ -166,11 +166,13 @@ public class StartUpMenuController
         for(int i = 0; i < size; i++)
         {
             Player min = new Player();
+            int k = 0;
             for(int j = 0; j < size - i; j++)
             {
                 Player p = ps.get(i);
                 if(min.getHighScore() >= p.getHighScore())
                 {
+                    k = j;
                     min.setName(p.getName());
                     min.setCoins(p.getCoins());
                     min.setCurrentCharacter(p.getCurrentCharacter());
@@ -179,8 +181,11 @@ public class StartUpMenuController
                     min.setWeapons(p.getWeapons());
                 }
             }
-            ps.remove(i);
+            Player p = ps.remove(i);
             ps.add(i, min);
+            ps.remove(k);
+            ps.add(k, p);
+            
         }
         return ps;
     }
