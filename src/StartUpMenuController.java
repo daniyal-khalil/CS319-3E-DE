@@ -102,7 +102,7 @@ public class StartUpMenuController
         ObservableList<String> playerList = FXCollections.<String>observableArrayList();
         ObservableList<String> player1List = FXCollections.<String>observableArrayList();
         Saver s = new Saver("src\\sample\\a.txt");
-        ArrayList<Player> pls = sortByHS(s.getUserList());
+        ArrayList<Player> pls = s.getUserList();
         int len = maxLen(pls);
         for(int i = 0; i < pls.size(); i++) {
             playerList.add(pls.get(i).getName());
