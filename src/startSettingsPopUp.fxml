@@ -20,9 +20,9 @@
             </font>
         </Label>
         <Pane layoutX="24.0" layoutY="62.0" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #fafafa;">
-            <children>
-                <Slider layoutX="29.0" layoutY="22.0" prefHeight="15.0" prefWidth="328.0" />
-            </children>
+         <children>
+            <Slider fx:id="sound"  majorTickUnit="25f" minorTickCount="10" value="50" showTickLabels="true" showTickMarks="true" layoutX="26.0" layoutY="22.0" prefHeight="14.0" prefWidth="328.0" />
+         </children>
         </Pane>
         <Label alignment="CENTER_RIGHT" ellipsisString="" layoutX="55.0" layoutY="143.0" prefHeight="37.0" prefWidth="353.0" text="Music" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
             <font>
@@ -31,7 +31,7 @@
         </Label>
         <Pane layoutX="24.0" layoutY="184.0" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #fafafa;">
             <children>
-                <Slider layoutX="29.0" layoutY="22.0" prefHeight="15.0" prefWidth="328.0" />
+                <Slider fx:id="effects" layoutX="29.0" layoutY="22.0" prefHeight="15.0" prefWidth="328.0" />
             </children>
         </Pane>
     </children>
