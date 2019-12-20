@@ -171,7 +171,12 @@ public class StartUpMenuController
                 Player p = ps.get(i);
                 if(min.getHighScore() >= p.getHighScore())
                 {
-                    min = p;
+                    min.setName(p.getName());
+                    min.setCoins(p.getCoins());
+                    min.setCurrentCharacter(p.getCurrentCharacter());
+                    min.setCurrentWeapon(p.getCurrentWeapon());
+                    min.setCharacters(p.getCharacters());
+                    min.setWeapons(p.getWeapons());
                 }
             }
             ps.remove(i);
