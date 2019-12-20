@@ -31,6 +31,7 @@ public class UserMenuController {
 
     private final double MIN = 0d;
     private final double MAX = 100d;
+    private Player player;
     @FXML
     private Button newGame, store, modes, settings;
     @FXML
@@ -50,15 +51,6 @@ public class UserMenuController {
         GameController gameController = new GameController(actionEvent);
     }
 
-    public ArrayList<String> getInformationsW()
-    {
-        return informationsW;
-    }
-
-    public ArrayList<String> getInformationsC()
-    {
-        return informationsC;
-    }
 
     public void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
     {
@@ -113,13 +105,18 @@ public class UserMenuController {
         window.setScene(new Scene(root));
     }
 
+    public void setPlayer(Player player)
+    {
+        this.player = player;
+    }
+
 
     public void goingToStore(ActionEvent event)throws Exception{
         System.out.println("From controller");
         Stage window;
 
         window = (Stage) store.getScene().getWindow();
-        FXMLLoader loader =new  FXMLLoader(getClass().getResource("Shop.fxml"));
+        FXMLLoader loader = new  FXMLLoader(getClass().getResource("Shop.fxml"));
         Parent root = (Parent) loader.load();
 
         ShopandModeController shop = new ShopandModeController();
@@ -135,19 +132,19 @@ public class UserMenuController {
 
         Image img = null;
         informationsC = new ArrayList<String>();
-        informationsC.add("captan america 0 \n power:1 \n price:100 \n");
-        informationsC.add("captan america 1 \n power:1 \n price:100 \n");
-        informationsC.add("captan america 2 \n power:1 \n price:100 \n");
-        informationsC.add("captan america 3 \n power:1 \n price:100 \n");
-        informationsC.add("captan america 4 \n power:1 \n price:100 \n");
-        informationsC.add("captan america 5 \n power:1 \n price:100 \n");
-        informationsC.add("captan america 6 \n power:1 \n price:100 \n");
+        informationsC.add("captan america 0 \n price:100");
+        informationsC.add("captan america 1 \n price:100");
+        informationsC.add("captan america 2 \n price:100");
+        informationsC.add("captan america 3 \n price:100");
+        informationsC.add("captan america 4 \n price:100");
+        informationsC.add("captan america 5 \n price:100");
+        informationsC.add("captan america 6 \n price:100");
         //System.out.println(informations.get(0));
         informationsW = new ArrayList<String>();
-        informationsW.add("weapon 0 \n power:1 \n price:100 \n");
-        informationsW.add("weapon 1 \n power:1 \n price:100 \n");
-        informationsW.add("weapon 2 \n power:1 \n price:100 \n");
-        informationsW.add("weapon 3 \n power:1 \n price:100 \n");
+        informationsW.add("weapon 0 \n power:1 \n price:100");
+        informationsW.add("weapon 1 \n power:1 \n price:100");
+        informationsW.add("weapon 2 \n power:1 \n price:100");
+        informationsW.add("weapon 3 \n power:1 \n price:100");
 
 
 
@@ -190,11 +187,9 @@ public class UserMenuController {
         }
         System.out.println(imgs1.size());
         shop.setInformations(informationsC, informationsW);
+        shop.setPlayer( player);
         items1 = FXCollections.observableArrayList(imgs1);
         ((ListView)root.lookup("#images1")).setItems(items1);
         window.setScene(new Scene(root));
     }
-
-
-
 }
