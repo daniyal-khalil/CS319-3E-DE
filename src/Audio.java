@@ -17,14 +17,17 @@ public class Audio
     private int index;
     private Media media;
     private MediaPlayer player;
+    private boolean isMuted;
 
     // constructors
     public Audio(String url)
     {
+
         this.url = new ArrayList<String>();
         this.url.add(url);
         media = new Media(new File(this.url.get(0)).toURI().toString());
         player = new MediaPlayer(media);
+        isMuted = false;
         index = 0;
     }
 
@@ -38,6 +41,18 @@ public class Audio
         player = new MediaPlayer(media);
         index = 0;
     }
+
+    public boolean getIsMuted()
+    {
+        return isMuted;
+    }
+
+    public void setIsMuted( boolean mutedOrNot )
+    {
+        isMuted = mutedOrNot;
+    }
+
+
 
     // methods
     public boolean play()
@@ -58,16 +73,27 @@ public class Audio
         player.stop();
     }
 
-    public void increaseVol()
+    public void increaseVol( double vol )
     {
-        double vol = player.getVolume();
-        if(vol <= 0.9)
-        {
-            vol += 0.1;
+        //double vol = player.getVolume();
+        //if(vol <= 0.9)
+        //{
+            //vol += 0.1;
             player.setVolume(vol);
-        }
+        //}
     }
 
+    public double getVol()
+    {
+        double vol = player.getVolume();
+        return vol;
+
+    }
+    public void setVol( double vol)
+    {
+            player.setVolume(vol);
+
+    }
     public void decreaseVol()
     {
         double vol = player.getVolume();
