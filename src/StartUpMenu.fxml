@@ -14,7 +14,7 @@
                 <Image url="@images/backgroun.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="loadProfile" layoutX="600.0" layoutY="380.0" mnemonicParsing="false" onAction="#onLoadProfile" prefHeight="86.0" prefWidth="313.0" text="Previous Profile" textFill="#52545e">
+        <Button fx:id="loadProfile" alignment="TOP_LEFT" layoutX="130.0" layoutY="380.0" mnemonicParsing="false" onAction="#onLoadProfile" prefHeight="86.0" prefWidth="313.0" text="Previous Profile" textFill="#52545e">
             <font>
                 <Font name="Berlin Sans FB" size="37.0" />
             </font>
@@ -29,7 +29,7 @@
                   <Image url="@icons/speaker.png" />
               </image>
           </ImageView>
-        <Button fx:id="createProfile" layoutX="600.0" layoutY="250.0" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="86.0" prefWidth="313.0" text="New Profile" textFill="#52545e">
+        <Button fx:id="createProfile" alignment="TOP_LEFT" layoutX="130.0" layoutY="250.0" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="86.0" prefWidth="313.0" text="New Profile" textFill="#52545e">
             <font>
                 <Font name="Berlin Sans FB" size="37.0" />
             </font>
