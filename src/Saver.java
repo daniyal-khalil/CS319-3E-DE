@@ -18,8 +18,7 @@ import java.io.*;
  * boolean setCurrentWeapon(String userName, Weapon w): returns false if the specified Weapon is not in the characters list.
  */
 public class Saver
-{
-    
+{    
     // variables
     private final String fileName;
     private ProcessFile details;
@@ -150,11 +149,12 @@ public class Saver
         {
             player.setHighScore(highScore);
             details.changePlayer(userName, player);
+            ArrayList<Player> temp = getUserList();
             deleteAll();
-            int length = getUserList().size();
+            int length = temp.size();
             for(int i = 0; i < length; i++)
             {
-                writeNewUser(getUserList().get(i));
+                writeNewUser(temp.get(i));
             }
             return true;
         }
