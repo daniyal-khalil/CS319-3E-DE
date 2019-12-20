@@ -38,8 +38,9 @@ public class GameController {
     private ImageView hero;
 
     private Stage gameStage;
-    private Pane gameOver;
+    private Player player;
 
+    private ArrayList<Human> humans;
 
 
 
@@ -69,6 +70,8 @@ public class GameController {
     private int noOfEnemies = 0;
 
     private int score;
+
+    private AnimationTimer timer;
 
     private ArrayList<ImageView> enemy;
     private String direction, shootDirection;
@@ -101,6 +104,11 @@ public class GameController {
             window.initModality(Modality.APPLICATION_MODAL);
             window.show();
         }
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        System.out.println(this.player.getCurrentWeapon().getName());
     }
 
     public void exittingGame(ActionEvent event)throws Exception{
@@ -232,7 +240,6 @@ public class GameController {
 //
 //        window.setScene(new Scene(root));
         score = 0;
-        gameOver = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
         shootDirection = "down";
         direction = "down";
         enemyDirection = new ArrayList<String>();
@@ -240,10 +247,12 @@ public class GameController {
             enemyDirection.add("");
         }
 
+        humans = new ArrayList<Human>();
+
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        weapon = new ImageView(setImage("CA_SHIELD.gif")) ;
+        weapon = new ImageView(setImage(player.getCurrentWeapon().getName() + ".gif")) ;
         enemy = new ArrayList<ImageView>();
-        img2 = setImage("CA_DOWN_R.png");
+        img2 = setImage(player.getCurrentCharacter().getName() + "_DOWN_R.png");
         hero = new ImageView(img2);
         enemy.add(new ImageView(setImage("HY_R.gif")));
         ImageView gameBack = new ImageView(setImage("gameBack.png"));
@@ -286,34 +295,33 @@ public class GameController {
         moveHeroTo(W / 2, H / 2);
 
         Scene scene = new Scene(gamePane, W, H, Color.FORESTGREEN);
-
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
                     case UP:  {
                         if (!goNorth)
-                            hero.setImage(setImage("CA_UP.gif"));
+                            hero.setImage(setImage(player.getCurrentCharacter().getName() + "_UP.gif"));
                         direction = "up";
                         goNorth = true;
                     } break;
                     case DOWN:  {
 
                         if (!goSouth)
-                            hero.setImage(setImage("CA_DOWN.gif"));
+                            hero.setImage(setImage(player.getCurrentCharacter().getName() + "_DOWN.gif"));
                         direction = "down";
                         goSouth = true; break;
 
                     }
                     case LEFT:  {
                         if (!goWest)
-                            hero.setImage(setImage("CA_LEFT.gif"));
+                            hero.setImage(setImage(player.getCurrentCharacter().getName() + "_LEFT.gif"));
                         direction = "left";
                         goWest  = true;
                     } break;
                     case RIGHT: {
                         if (!goEast)
-                            hero.setImage(setImage("CA_RIGHT.gif"));
+                            hero.setImage(setImage(player.getCurrentCharacter().getName() + "_RIGHT.gif"));
                         direction = "right";
                         goEast  = true;
                     } break;
@@ -338,19 +346,19 @@ public class GameController {
                 switch (event.getCode()) {
                     case UP:    {
 
-                        hero.setImage(setImage("CA_UP_R.png"));
+                        hero.setImage(setImage(player.getCurrentCharacter().getName() + "_UP_R.png"));
                         goNorth = false;
                     } break;
                     case DOWN:  {
-                        hero.setImage(setImage("CA_DOWN_R.png"));
+                        hero.setImage(setImage(player.getCurrentCharacter().getName() + "_DOWN_R.png"));
                         goSouth = false;
                     } break;
                     case LEFT:  {
-                        hero.setImage(setImage("CA_LEFT_R.png"));
+                        hero.setImage(setImage(player.getCurrentCharacter().getName() + "_LEFT_R.png"));
                         goWest  = false;
                     } break;
                     case RIGHT: {
-                        hero.setImage(setImage("CA_RIGHT_R.png"));
+                        hero.setImage(setImage(player.getCurrentCharacter().getName() + "_RIGHT_R.png"));
                         goEast  = false;
                     } break;
 //                    case SHIFT: running = false; break;
@@ -361,15 +369,19 @@ public class GameController {
         stage.setScene(scene);
         stage.show();
 
-        AnimationTimer timer = new AnimationTimer()  {
+        timer = new AnimationTimer()  {
             @Override
             public void handle(long now) {
                 int dx = 0, dy = 0;
-                spawnEnemies();;
-                collision();
+                spawnEnemies();
+                    if (collision()) {
+                        try {
+                            gameOver();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 topLabel.setText("Score: " + score);
-                over = collision();
-
                 followTheUser();
                 if (goNorth) {
                     if (heroY > 0) {
@@ -402,7 +414,7 @@ public class GameController {
                         hero.setTranslateX(hero.getTranslateX() - 3);
                         heroX -= 3;
                     }
-                    if (heroX > 500 && heroX < 1500)
+                    if (heroX > 450 && heroX < 1500)
                         dungeon.setTranslateX(dungeon.getTranslateX() + 3 );
 
                 }
@@ -421,17 +433,21 @@ public class GameController {
             }
         };
         timer.start();
-
-        if (collision()) {
-            stage.setScene(new Scene(gameOver));
-        }
     }
 
 
 
 
-
-
+    public void gameOver() throws Exception {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
+            Parent root = loader.load();
+            GameOverController gameOverController = new GameOverController();
+            gameOverController = loader.getController();
+            gameOverController.setPlayer(player);
+            gameOverController.setScore(score);
+            gameOverController.setScoreLabel(score);
+            gameStage.setScene(new Scene(root));
+    }
 
     private void moveHeroBy(int dx, int dy) {
         if (dx == 0 && dy == 0) return;
@@ -482,7 +498,7 @@ public class GameController {
         if (enemy.size() < 2 ) {
             if (enemy.size() < 2) {
                 System.out.println("Sup");
-                enemy.add(new ImageView(setImage("HY_D.gif")));
+                enemy.add(new ImageView(setImage("HY_R.gif")));
                 (enemy.get(enemy.size()-1)).relocate(rand_x, rand_y);
                 dungeon.getChildren().add(enemy.get(enemy.size()-1));
             }
@@ -558,15 +574,15 @@ public class GameController {
             }
             if (((heroX <= enemy.get(i).getLayoutX() + 10) && heroX >= enemy.get(i).getLayoutX() ) && (heroY >= enemy.get(i).getLayoutY() && (heroY <= enemy.get(i).getLayoutY() + 10))) {
                 System.out.println("NYAH");
+                heroX= -1000;
                 return true;
             }
         }
         return false;
     }
 
-    public void gameOver(Stage stage) {
-        if (over) {
-            stage.setScene(new Scene(gameOver));
-        }
+    public void spawnHumans() {
+        for (int i = 0; )
     }
+
 }
