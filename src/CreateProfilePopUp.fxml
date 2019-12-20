@@ -9,27 +9,32 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.StartUpMenuController">
-    <children>
-        <ImageView fitHeight="818.0" fitWidth="1120.0" layoutX="-86.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@images/backgroun.jpg" />
-            </image>
-        </ImageView>
-        <Label layoutX="309.0" layoutY="250.0" prefHeight="39.0" prefWidth="333.0" text="Enter unique username:" textFill="#0e152e">
-            <font>
-                <Font name="Berlin Sans FB" size="32.0" />
-            </font>
-        </Label>
-        <Button fx:id="nameEntered" layoutX="656.0" layoutY="296.0" mnemonicParsing="false" onAction="#enterName" prefHeight="39.0" prefWidth="74.0" text="Enter">
-            <font>
-                <Font name="Berlin Sans FB" size="16.0" />
-            </font>
-        </Button>
-        <TextField fx:id="createName" layoutX="309.0" layoutY="298.0" prefHeight="39.0" prefWidth="319.0" text=" ">
-            <font>
-                <Font name="System Italic" size="14.0" />
-            </font>
-        </TextField>
-        <Button layoutX="30.0" layoutY="30.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="41.0" text="back" textFill="#0e162e" fx:id="backFromCreate" onAction="#fromCreatToStart"/>
-    </children>
+   <children>
+      <ImageView fitHeight="818.0" fitWidth="1120.0" layoutX="-86.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@backgroun.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="309.0" layoutY="250.0" prefHeight="39.0" prefWidth="333.0" text="Enter unique username:" textFill="#0e152e">
+         <font>
+            <Font name="Berlin Sans FB" size="32.0" />
+         </font>
+      </Label>
+      <Button fx:id="nameEntered" layoutX="656.0" layoutY="296.0" mnemonicParsing="false" onAction="#enterName" prefHeight="39.0" prefWidth="74.0" text="Enter">
+         <font>
+            <Font name="Berlin Sans FB" size="16.0" />
+         </font>
+      </Button>
+      <TextField fx:id="createName" layoutX="309.0" layoutY="298.0" prefHeight="39.0" prefWidth="319.0" text="">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="backFromCreate" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" onAction="#fromCreatToStart" prefHeight="28.0" prefWidth="41.0" text="back" textFill="#0e162e" />
+      <Label layoutX="309.0" layoutY="350.0" prefHeight="28.0" prefWidth="619.0" text="" fx:id="invalid">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
