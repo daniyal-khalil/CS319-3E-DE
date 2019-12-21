@@ -41,7 +41,15 @@ public class ShopandModeController extends UserMenuController
         System.out.println("From controller");
         Stage window;
         window = (Stage) backFromStore.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        
+        
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        Parent root = (Parent) loader.load();
+        UserMenuController userMenu = new UserMenuController();
+        userMenu = loader.getController();
+        userMenu.setAudioEffect(gameAudio);
+        userMenu.setMusic(music);
+        
         Pane root = loader.load();
         UserMenuController userMenuController = new UserMenuController();
         userMenuController = loader.getController();
@@ -186,5 +194,16 @@ public class ShopandModeController extends UserMenuController
             error.setText("Not in your collection!");
         }
         System.out.println(found);
+    }
+    
+    public void setMusic(Audio musicAudio) {
+        System.out.println( "effect setted in user");
+        music = musicAudio;
+    }
+
+    public void setAudioEffect(Audio audioEffect) {
+        System.out.println( "music setted in user");
+        gameAudio = audioEffect;
+
     }
 }
