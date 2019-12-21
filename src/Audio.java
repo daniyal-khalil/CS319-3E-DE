@@ -2,6 +2,8 @@ package sample;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class Audio
         this.url.add(url);
         media = new Media(new File(this.url.get(0)).toURI().toString());
         player = new MediaPlayer(media);
+        player.setVolume(0.5);
         isMuted = false;
         index = 0;
     }
@@ -40,6 +43,10 @@ public class Audio
             media = new Media(new File("src\\sample\\musicAbba.mp3").toURI().toString());
         player = new MediaPlayer(media);
         index = 0;
+    }
+
+    public void getUrl() {
+        System.out.println(url.get(0));
     }
 
     public boolean getIsMuted()
@@ -62,6 +69,19 @@ public class Audio
         return true;
     }
 
+    public boolean playContinously()
+    {
+        player.setAutoPlay(true);
+        player.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                player.seek(Duration.ZERO);
+            }
+        });
+        player.play();
+        return true;
+    }
+
+
     public boolean pause()
     {
         player.pause();
@@ -73,13 +93,15 @@ public class Audio
         player.stop();
     }
 
-    public void increaseVol( double vol )
+    public void changeVolume( int volume )
     {
-        //double vol = player.getVolume();
+        volume = volume/10;
+        double vol = volume * 0.1;
         //if(vol <= 0.9)
         //{
-            //vol += 0.1;
-            player.setVolume(vol);
+        //vol += 0.1;
+
+        player.setVolume(vol);
         //}
     }
 
@@ -91,7 +113,7 @@ public class Audio
     }
     public void setVol( double vol)
     {
-            player.setVolume(vol);
+        player.setVolume(vol);
 
     }
     public void decreaseVol()
