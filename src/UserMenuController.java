@@ -57,7 +57,7 @@ public class UserMenuController {
     }
 
 
-    ublic void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
+    public void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
     {
         //try{gameAudio.mute();}catch(NullPointerException e){  System.out.println("cat died");}
         FXMLLoader loader =new  FXMLLoader(getClass().getResource("startSettingsPopUp.fxml"));
