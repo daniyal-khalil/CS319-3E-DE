@@ -356,7 +356,7 @@ public class StartUpMenuController
 
     public void setMusic(Audio musicAudio) {
         System.out.println( "effect setted in start");
-        mute.setVisible(false);
+        music = musicAudio;
     }
      public void settleMute()
     {
