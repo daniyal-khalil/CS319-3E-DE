@@ -21,6 +21,7 @@ public class Main extends Application {
         System.out.println("passed to first scene");
         startUpMenuController.setAudioEffect(gameAudio);
         startUpMenuController.setMusic(music);
+        startUpMenuController.settleMute();
         
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1024, 720));
