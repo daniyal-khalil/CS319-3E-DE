@@ -29,6 +29,8 @@ public class StartUpMenuController
     private Audio music;
     private Audio gameAudio;
     @FXML
+    private ImageView mute,play;
+    @FXML
     private Button createProfile;
     @FXML
     private Button loadProfile;
