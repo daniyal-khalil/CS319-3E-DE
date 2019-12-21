@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class ShopandModeController extends UserMenuController
 {
+    private Audio gameAudio;
+    private Audio music;
     @FXML
     private Button backFromModes, backFromStore;
     @FXML
