@@ -54,6 +54,23 @@ public class ShopandModeController extends UserMenuController
         
         window.setScene(new Scene(root));
     }
+    
+    public void fromModeToUserMenu(ActionEvent event)throws Exception{
+        System.out.println("From controller");
+        Stage window;
+        window = (Stage) backFromModes.getScene().getWindow();
+
+
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("UserMenu.fxml"));
+
+        Pane root = loader.load();
+        UserMenuController userMenuController = new UserMenuController();
+        userMenuController = loader.getController();
+       
+        userMenuController.setAudioEffect(gameAudio);
+        userMenuController.setMusic(music);
+        window.setScene(new Scene(root));
+    }
 
     public void setInformations( ArrayList<String> informationsC, ArrayList<String> informationsW) {
         System.out.println("Here");
