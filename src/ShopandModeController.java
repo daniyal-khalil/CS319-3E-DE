@@ -66,7 +66,7 @@ public class ShopandModeController extends UserMenuController
         Pane root = loader.load();
         UserMenuController userMenuController = new UserMenuController();
         userMenuController = loader.getController();
-       
+        userMenuController.setPlayer(player);
         userMenuController.setAudioEffect(gameAudio);
         userMenuController.setMusic(music);
         window.setScene(new Scene(root));
