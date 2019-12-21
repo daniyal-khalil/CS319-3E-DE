@@ -26,7 +26,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1024, 720));
         primaryStage.show();
         
-        music.play();
+        music.playContinously();
     }
 
 
