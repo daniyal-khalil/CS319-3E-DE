@@ -44,16 +44,14 @@ public class ShopandModeController extends UserMenuController
         
         
         FXMLLoader loader =new  FXMLLoader(getClass().getResource("UserMenu.fxml"));
-        Parent root = (Parent) loader.load();
-        UserMenuController userMenu = new UserMenuController();
-        userMenu = loader.getController();
-        userMenu.setAudioEffect(gameAudio);
-        userMenu.setMusic(music);
-        
+              
         Pane root = loader.load();
         UserMenuController userMenuController = new UserMenuController();
         userMenuController = loader.getController();
         userMenuController.setPlayer(player);
+        userMenuController.setAudioEffect(gameAudio);
+        userMenuController.setMusic(music);
+        
         window.setScene(new Scene(root));
     }
 
