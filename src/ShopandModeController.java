@@ -69,13 +69,6 @@ public class ShopandModeController extends UserMenuController
         System.out.println(player.getName());
     }
 
-    public void goBackToUserMenu(ActionEvent event)throws Exception{
-        System.out.println("From controller");
-        Stage window;
-        window = (Stage) backFromModes.getScene().getWindow();
-
-    }
-
     public void characterSelected(MouseEvent event)throws Exception
     {
         error.setText("");
