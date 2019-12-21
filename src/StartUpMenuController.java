@@ -68,14 +68,24 @@ public class StartUpMenuController
     }
     
     public void muteTheAudio(MouseEvent mouseEvent) throws Exception {
-        System.out.println("muted");
+
         if( music.getIsMuted()) {
             music.unmute();
             music.setIsMuted(false);
+
+            mute.setVisible(false);
+            play.setVisible(true);
+
+
         }
         else {
             music.mute();
             music.setIsMuted(true);
+
+
+            mute.setVisible(true);
+            play.setVisible(false);
+
         }
     }
 
@@ -346,6 +356,8 @@ public class StartUpMenuController
 
     public void setMusic(Audio musicAudio) {
         System.out.println( "effect setted in start");
+        mute.setVisible(false);
+        play.setVisible(true);
         music = musicAudio;
     }
 
