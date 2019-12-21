@@ -73,7 +73,7 @@ public class UserMenuController {
         userMenu.setAudioEffect(gameAudio);
         userMenu.setMusic(music);
         ((Slider)root.lookup("#musicAudio")).valueProperty().addListener((observable, oldValue, newValue) -> {
-            changeVolume(newValue.intValue());
+            music.changeVolume(newValue.intValue());
 
         });
         Stage window = new Stage();
