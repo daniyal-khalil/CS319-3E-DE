@@ -25,7 +25,7 @@ public class ShopandModeController extends UserMenuController
     @FXML
     private ListView<ImageView> images, images1;
     @FXML
-    private Label information;
+    private Label information, error;
     @FXML
     private Button buyOrChoose;
 
@@ -33,6 +33,7 @@ public class ShopandModeController extends UserMenuController
     private ArrayList<String> informationsW;
     private Player player;
     Boolean isWeapon;
+    String saver = "";
 
     public void fromStoreToUserMenu(ActionEvent event)throws Exception{
         System.out.println("From controller");
@@ -67,8 +68,11 @@ public class ShopandModeController extends UserMenuController
 
     public void characterSelected(MouseEvent event)throws Exception
     {
+        error.setText("");
+        System.out.println(player.getName());
+        //Parent root = FXMLLoader.load(getClass().getResource("shop.fxml"));
         choosen.setImage(images.getSelectionModel().getSelectedItem().getImage());
-        System.out.println(informationsC.get(images.getSelectionModel().getSelectedIndex()));
+        //System.out.println(informationsC.get(images.getSelectionModel().getSelectedIndex()));
         information.setText(informationsC.get(images.getSelectionModel().getSelectedIndex()));
         System.out.println(images.getSelectionModel().getSelectedIndex());
         isWeapon = false;
@@ -78,6 +82,8 @@ public class ShopandModeController extends UserMenuController
 
     public void weaponSelected(MouseEvent event)throws Exception
     {
+        error.setText("");
+        //Parent root = FXMLLoader.load(getClass().getResource("shop.fxml"));
         choosen.setImage(images1.getSelectionModel().getSelectedItem().getImage());
         //System.out.println(informations.get(images.getSelectionModel().getSelectedIndex()));
         information.setText(informationsW.get(images1.getSelectionModel().getSelectedIndex()));
@@ -85,7 +91,9 @@ public class ShopandModeController extends UserMenuController
         isWeapon = true;
     }
 
-    public void buyStuff(ActionEvent event)throws Exception{
+    public void buyStuff(ActionEvent event)throws Exception
+    {
+        error.setText("");
         System.out.println("buy stuff or choose stuff");
         if( !isWeapon )
         {
@@ -102,8 +110,14 @@ public class ShopandModeController extends UserMenuController
                 String word = information.getText().substring(0, i);
                 temp.setName(word);
                 player.addCharacter(temp);
+                Saver s = new Saver("src\\sample\\a.txt");
+                s.addCharacter(player.getName(), temp);
                 System.out.println(images.getSelectionModel().getSelectedIndex());
                 System.out.println("aldiq");
+            }
+            else
+            {
+                error.setText("not enough coins!");
             }
         }
         else
@@ -120,15 +134,22 @@ public class ShopandModeController extends UserMenuController
                 String word1 = information.getText().substring(0, i);
                 temp.setName(word1);
                 player.addWeapon(temp);
+                Saver s1 = new Saver("src\\sample\\a.txt");
+                s1.addWeapon(player.getName(), temp);
                 System.out.println(images1.getSelectionModel().getSelectedIndex());
                 System.out.println("aldiq");
             }
-
+            else
+            {
+                error.setText("not enough coins!");
+            }
         }
     }
 
     public void chooseStuff(ActionEvent event) throws Exception
     {
+        error.setText("");
+        System.out.println(error.getText());
         int i = information.getText().indexOf("price"); // 4
         Boolean found = false;
         String word = information.getText().substring(0, i);
@@ -139,6 +160,8 @@ public class ShopandModeController extends UserMenuController
                 if(player.getCharacters().get(a).getName().equals(word) )
                 {
                     player.setCurrentCharacter(player.getCharacters().get(a));
+                    Saver s = new Saver("src\\sample\\a.txt");
+                    s.setCurrentCharacter(player.getName(),player.getCharacters().get(a));
                     found = true;
                 }
             }
@@ -149,6 +172,8 @@ public class ShopandModeController extends UserMenuController
             {
                 if(player.getWeapons().get(a).getName().equals(word) )
                 {
+                    Saver s1 = new Saver("src\\sample\\a.txt");
+                    s1.setCurrentWeapon(player.getName(), player.getWeapons().get(a));
                     player.setCurrentWeapon(player.getWeapons().get(a));
                     found = true;
                 }
@@ -156,7 +181,7 @@ public class ShopandModeController extends UserMenuController
         }
         if(!found)
         {
-            information.setText("Not in your collection!");
+            error.setText("Not in your collection!");
         }
         System.out.println(found);
     }
