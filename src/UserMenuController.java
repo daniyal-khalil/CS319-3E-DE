@@ -68,7 +68,7 @@ public class UserMenuController {
         System.out.println("passed to pop");
         userMenu.setAudioEffect(gameAudio);
         userMenu.setMusic(music);
-        ((Slider)root.lookup("#music")).valueProperty().addListener((observable, oldValue, newValue) -> {
+        ((Slider)root.lookup("#musicAudio")).valueProperty().addListener((observable, oldValue, newValue) -> {
             changeVolume(newValue.intValue());
 
         });
