@@ -114,7 +114,7 @@ public class StartUpMenuController
         window = (Stage) loadProfile.getScene().getWindow();
         
         //loading fxml and setting audios
-        FXMLLoader loader =new  FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("LoadProfile.fxml"));
         Parent root = (Parent) loader.load();
         UserMenuController userMenu = new UserMenuController();
         userMenu = loader.getController();
@@ -233,6 +233,9 @@ public class StartUpMenuController
         UserMenuController userMenuController = new UserMenuController();
         userMenuController = loader.getController();
         userMenuController.setPlayer(p);
+        userMenu.setMusic(music);
+        userMenu.setAudioEffect(gameAudio);
+        
         Stage stage =  (Stage) players.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -251,7 +254,14 @@ public class StartUpMenuController
 
     public void enterName(ActionEvent event) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("UserMenu.fxml"));
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        Parent root = (Parent) loader.load();
+        UserMenuController userMenu = new UserMenuController();
+        userMenu = loader.getController();
+        System.out.println("passed to menu");
+        userMenu.setMusic(music);
+        userMenu.setAudioEffect(gameAudio);
+        
         String username = createName.getText();
 
         if(username.contains("<UN>") ||
@@ -290,6 +300,8 @@ public class StartUpMenuController
                 UserMenuController userMenuController = new UserMenuController();
                 userMenuController = loader.getController();
                 userMenuController.setPlayer(player);
+                userMenu.setMusic(music);
+                userMenu.setAudioEffect(gameAudio);
 
                 Stage stage = (Stage) createName.getScene().getWindow();
                 Scene scene = new Scene(root1);
@@ -302,7 +314,14 @@ public class StartUpMenuController
         System.out.println("go to start");
         Stage window;
         window = (Stage) backFromLoad.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
+        
+        //load fxml and set audios
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
+        Parent root = (Parent) loader.load();
+        StartUpMenuController startUpMenuController = new StartUpMenuController();
+        startUpMenuController = loader.getController();
+        startUpMenuController.setMusic(music);
+        startUpMenuController.setAudioEffect(gameAudio);
 
         window.setScene(new Scene(root));
     }
@@ -312,8 +331,17 @@ public class StartUpMenuController
         Stage window;
         window = (Stage) backFromCreate.getScene().getWindow();
         System.out.println("get the window");
-        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
+        
+        //load fxml and set audios
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
+        Parent root = (Parent) loader.load();
+        StartUpMenuController startUpMenuController = new StartUpMenuController();
+        startUpMenuController = loader.getController();
+        startUpMenuController.setMusic(music);
+        startUpMenuController.setAudioEffect(gameAudio);
+        
         System.out.println("get the root");
+              
         window.setScene(new Scene(root));
     }
 
