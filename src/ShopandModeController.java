@@ -214,4 +214,18 @@ public class ShopandModeController extends UserMenuController
         gameAudio = audioEffect;
 
     }
+    
+    public void goBack(MouseEvent mouseEvent) throws IOException {        
+        System.out.println("From controller");
+        Stage window;
+        window = (Stage) back.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        Pane root = loader.load();
+        UserMenuController userMenuController = new UserMenuController();
+        userMenuController = loader.getController();
+        userMenuController.setPlayer(player);
+        userMenuController.setAudioEffect(gameAudio);
+        userMenuController.setMusic(music);
+        window.setScene(new Scene(root));
+    }
 }
