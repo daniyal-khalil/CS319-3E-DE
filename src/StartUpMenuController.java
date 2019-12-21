@@ -233,8 +233,8 @@ public class StartUpMenuController
         UserMenuController userMenuController = new UserMenuController();
         userMenuController = loader.getController();
         userMenuController.setPlayer(p);
-        userMenu.setMusic(music);
-        userMenu.setAudioEffect(gameAudio);
+        userMenuController.setMusic(music);
+        userMenuController.setAudioEffect(gameAudio);
         
         Stage stage =  (Stage) players.getScene().getWindow();
         Scene scene = new Scene(root);
@@ -295,10 +295,10 @@ public class StartUpMenuController
                         new Character("Captain America", 0), 0, new ArrayList<Weapon>(), new ArrayList<Character>());
                 s.writeNewUser(newP);
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
+                FXMLLoader loader1 = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
                 Parent root1 = (Parent) loader.load();
                 UserMenuController userMenuController = new UserMenuController();
-                userMenuController = loader.getController();
+                userMenuController = loader1.getController();
                 userMenuController.setPlayer(player);
                 userMenu.setMusic(music);
                 userMenu.setAudioEffect(gameAudio);
