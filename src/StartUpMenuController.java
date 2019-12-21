@@ -19,12 +19,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-
+import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.*;
 public class StartUpMenuController
 {
+    private Audio music;
+    private Audio gameAudio;
     @FXML
     private Button createProfile;
     @FXML
