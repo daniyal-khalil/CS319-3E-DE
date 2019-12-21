@@ -27,10 +27,16 @@
          <font>
             <Font size="16.0" />
          </font></Label>
-      <Button fx:id="buyOrChoose" onAction="#buyStuff" layoutX="749.0" layoutY="462.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="48.0" text="BUY">
+      <Button fx:id="buyOrChoose" layoutX="749.0" layoutY="462.0" mnemonicParsing="false" onAction="#buyStuff" prefHeight="49.0" prefWidth="48.0" text="BUY">
          <font>
             <Font name="Berlin Sans FB" size="13.0" />
          </font></Button>
       <ImageView fx:id="choosen" fitHeight="230.0" fitWidth="211.0" layoutX="766.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="choose" layoutX="747.0" layoutY="528.0" mnemonicParsing="false" onAction="#chooseStuff" prefHeight="48.0" prefWidth="222.0" text="CHOOSE" />
+      <Label fx:id="error" alignment="CENTER" layoutX="778.0" layoutY="331.0" prefHeight="17.0" prefWidth="188.0" textFill="#e10808">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
