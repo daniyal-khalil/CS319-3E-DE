@@ -31,7 +31,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class GameController {
-
+    
+    private Audio gameAudio;
+    private Audio music;
+    
     @FXML
     public Pane gamePanel;
     @FXML
@@ -583,6 +586,16 @@ public class GameController {
 
     public void spawnHumans() {
         for (int i = 0; )
+    }
+    public void setMusic(Audio musicAudio) {
+        System.out.println( "effect setted in user");
+        music = musicAudio;
+    }
+
+    public void setAudioEffect(Audio audioEffect) {
+        System.out.println( "music setted in user");
+        gameAudio = audioEffect;
+
     }
 
 }
