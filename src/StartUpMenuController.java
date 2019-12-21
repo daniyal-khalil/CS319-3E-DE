@@ -52,9 +52,28 @@ public class StartUpMenuController
         System.out.println("go to create name");
         Stage window;
         window = (Stage) createProfile.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("CreateProfilePopUp.fxml"));
+        
+        //load fxml and set audios
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("CreateProfilePopUp.fxml"));
+        Parent root = (Parent) loader.load();
+        StartUpMenuController startUpMenuController = new StartUpMenuController();
+        startUpMenuController = loader.getController();
+        startUpMenuController.setMusic(music);
+        startUpMenuController.setAudioEffect(gameAudio);
 
         window.setScene(new Scene(root));
+    }
+    
+    public void muteTheAudio(MouseEvent mouseEvent) throws Exception {
+        System.out.println("muted");
+        if( music.getIsMuted()) {
+            music.unmute();
+            music.setIsMuted(false);
+        }
+        else {
+            music.mute();
+            music.setIsMuted(true);
+        }
     }
 
     private class Info
@@ -90,7 +109,16 @@ public class StartUpMenuController
         System.out.println("go to create name");
         Stage window;
         window = (Stage) loadProfile.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("LoadProfilePopUp.fxml"));
+        
+        //loading fxml and setting audios
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        Parent root = (Parent) loader.load();
+        UserMenuController userMenu = new UserMenuController();
+        userMenu = loader.getController();
+        System.out.println("passed to menu");
+        userMenu.setMusic(music);
+        userMenu.setAudioEffect(gameAudio);
+        
         players = (ListView<String>) root.lookup("#players");
         players1 = (ListView<String>) root.lookup("#players1");
 
@@ -286,6 +314,15 @@ public class StartUpMenuController
         window.setScene(new Scene(root));
     }
 
+    public void setMusic(Audio musicAudio) {
+        System.out.println( "effect setted in start");
+        music = musicAudio;
+    }
 
+    public void setAudioEffect(Audio audioEffect) {
+        System.out.println( "music setted in start");
+        gameAudio = audioEffect;
+
+    }
 
 }
