@@ -33,11 +33,16 @@ public class ShopandModeController extends UserMenuController
     private ArrayList<String> informationsW;
     private Player player;
     Boolean isWeapon;
+
     public void fromStoreToUserMenu(ActionEvent event)throws Exception{
         System.out.println("From controller");
         Stage window;
         window = (Stage) backFromStore.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("UserMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        Pane root = loader.load();
+        UserMenuController userMenuController = new UserMenuController();
+        userMenuController = loader.getController();
+        userMenuController.setPlayer(player);
         window.setScene(new Scene(root));
     }
 
@@ -50,19 +55,18 @@ public class ShopandModeController extends UserMenuController
     public void setPlayer( Player player)
     {
         this.player = player;
+        System.out.println(player.getName());
     }
 
     public void goBackToUserMenu(ActionEvent event)throws Exception{
         System.out.println("From controller");
         Stage window;
         window = (Stage) backFromModes.getScene().getWindow();
-        Pane root = FXMLLoader.load(getClass().getResource("UserMenu.fxml"));
-        window.setScene(new Scene(root));
+
     }
 
     public void characterSelected(MouseEvent event)throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("shop.fxml"));
         choosen.setImage(images.getSelectionModel().getSelectedItem().getImage());
         System.out.println(informationsC.get(images.getSelectionModel().getSelectedIndex()));
         information.setText(informationsC.get(images.getSelectionModel().getSelectedIndex()));
@@ -74,7 +78,6 @@ public class ShopandModeController extends UserMenuController
 
     public void weaponSelected(MouseEvent event)throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("shop.fxml"));
         choosen.setImage(images1.getSelectionModel().getSelectedItem().getImage());
         //System.out.println(informations.get(images.getSelectionModel().getSelectedIndex()));
         information.setText(informationsW.get(images1.getSelectionModel().getSelectedIndex()));
