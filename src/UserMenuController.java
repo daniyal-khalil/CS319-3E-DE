@@ -87,8 +87,15 @@ public class UserMenuController {
         System.out.println("From controller");
         Stage window;
         window = (Stage) modes.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Modes.fxml"));
-
+        
+        //load fxml and set audios
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("Modes.fxml"));
+        Parent root = (Parent) loader.load();
+        ShopandModeController shop = new ShopandModeController();
+        shop = loader.getController();
+        shop.setAudioEffect(gameAudio);
+        shop.setMusic(music);
+        
         window.setScene(new Scene(root));
     }
 
@@ -104,11 +111,14 @@ public class UserMenuController {
         Stage window;
 
         window = (Stage) store.getScene().getWindow();
-        FXMLLoader loader = new  FXMLLoader(getClass().getResource("Shop.fxml"));
+        
+        //load fxml and set audios
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("Shop.fxml"));
         Parent root = (Parent) loader.load();
-
         ShopandModeController shop = new ShopandModeController();
         shop = loader.getController();
+        shop.setAudioEffect(gameAudio);
+        shop.setMusic(music);
 
 //       Parent root = FXMLLoader.load(getClass().getResource("Shop.fxml"));
         images = new ListView<ImageView>();
