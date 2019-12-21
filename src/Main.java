@@ -21,10 +21,12 @@ public class Main extends Application {
         System.out.println("passed to first scene");
         startUpMenuController.setAudioEffect(gameAudio);
         startUpMenuController.setMusic(music);
-        music.play();
+        
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1024, 720));
         primaryStage.show();
+        
+        music.play();
     }
 
 
