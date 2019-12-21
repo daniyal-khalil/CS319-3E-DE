@@ -46,6 +46,7 @@ public class UserMenuController {
     ArrayList<String> informationsW;
 
     public void playGame(ActionEvent actionEvent) throws Exception {
+        music.pause();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GamePanel.fxml"));
         Parent root = (Parent) loader.load();
         GameController gameController = new GameController();
@@ -53,6 +54,9 @@ public class UserMenuController {
         System.out.println(player.getName());
         gameController.setPlayer(player);
         gameController.goingToPlay(actionEvent);
+        gameController.setAudioEffect(gameAudio);
+        gameController.setMusic(music);
+        gameAudio.play();
 
     }
 
