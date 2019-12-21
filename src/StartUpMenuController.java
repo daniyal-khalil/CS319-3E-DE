@@ -5,7 +5,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,17 +19,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import javafx.scene.input.MouseEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
 public class StartUpMenuController
 {
-    private Audio music;
-    private Audio gameAudio;
-    @FXML
-    private ImageView mute,play;
     @FXML
     private Button createProfile;
     @FXML
@@ -58,38 +52,9 @@ public class StartUpMenuController
         System.out.println("go to create name");
         Stage window;
         window = (Stage) createProfile.getScene().getWindow();
-        
-        //load fxml and set audios
-        FXMLLoader loader =new  FXMLLoader(getClass().getResource("CreateProfilePopUp.fxml"));
-        Parent root = (Parent) loader.load();
-        StartUpMenuController startUpMenuController = new StartUpMenuController();
-        startUpMenuController = loader.getController();
-        startUpMenuController.setMusic(music);
-        startUpMenuController.setAudioEffect(gameAudio);
+        Parent root = FXMLLoader.load(getClass().getResource("CreateProfilePopUp.fxml"));
 
         window.setScene(new Scene(root));
-    }
-    
-    public void muteTheAudio(MouseEvent mouseEvent) throws Exception {
-
-        if( music.getIsMuted()) {
-            music.unmute();
-            music.setIsMuted(false);
-
-            mute.setVisible(false);
-            play.setVisible(true);
-
-
-        }
-        else {
-            music.mute();
-            music.setIsMuted(true);
-
-
-            mute.setVisible(true);
-            play.setVisible(false);
-
-        }
     }
 
     private class Info
@@ -125,16 +90,7 @@ public class StartUpMenuController
         System.out.println("go to create name");
         Stage window;
         window = (Stage) loadProfile.getScene().getWindow();
-        
-        //loading fxml and setting audios
-        FXMLLoader loader =new  FXMLLoader(getClass().getResource("LoadProfile.fxml"));
-        Parent root = (Parent) loader.load();
-        UserMenuController userMenu = new UserMenuController();
-        userMenu = loader.getController();
-        System.out.println("passed to menu");
-        userMenu.setMusic(music);
-        userMenu.setAudioEffect(gameAudio);
-        
+        Parent root = FXMLLoader.load(getClass().getResource("LoadProfilePopUp.fxml"));
         players = (ListView<String>) root.lookup("#players");
         players1 = (ListView<String>) root.lookup("#players1");
 
@@ -146,9 +102,9 @@ public class StartUpMenuController
         ObservableList<String> playerList = FXCollections.<String>observableArrayList();
         ObservableList<String> player1List = FXCollections.<String>observableArrayList();
         Saver s = new Saver("src\\sample\\a.txt");
-        ArrayList<Player> pls = s.getUserList();
+        ArrayList<Player> pls = selectionSort(s.getUserList());
         int len = maxLen(pls);
-        for(int i = 0; i < pls.size(); i++) {
+        for(int i = pls.size() - 1; i >= 0; i--) {
             playerList.add(pls.get(i).getName());
             player1List.add( "" + pls.get(i).getHighScore());
         }
@@ -229,7 +185,7 @@ public class StartUpMenuController
             ps.add(i, min);
             ps.remove(k);
             ps.add(k, p);
-            
+
         }
         return ps;
     }
@@ -246,13 +202,42 @@ public class StartUpMenuController
         UserMenuController userMenuController = new UserMenuController();
         userMenuController = loader.getController();
         userMenuController.setPlayer(p);
-        userMenuController.setMusic(music);
-        userMenuController.setAudioEffect(gameAudio);
-        
         Stage stage =  (Stage) players.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public ArrayList<Player> selectionSort(ArrayList<Player> pls)
+    {
+        int size = pls.size();
+        if(size == 0)
+            return new ArrayList<Player>();
+        ArrayList<Player> tempP = pls;
+        for(int i = size - 1; i >= 0; i--)
+        {
+            int max = findMax(tempP, 0, i);
+            Player maxPl = tempP.get(max);
+            Player temp = tempP.remove(i);
+            tempP.add(i, maxPl);
+            tempP.remove(max);
+            tempP.add(max, temp);
+        }
+        return tempP;
+    }
+
+    private int findMax(ArrayList<Player> pls, int i1, int i2)
+    {
+        int size = pls.size();
+        if(size == 0)
+            return 0;
+        int max = i1;
+        for(int i = i1; i <= i2; i++)
+        {
+            if(pls.get(i).getHighScore() >= pls.get(max).getHighScore())
+                max = i;
+        }
+        return max;
     }
 
     private List<Info> parseUserList(ArrayList<Player> l)
@@ -267,14 +252,7 @@ public class StartUpMenuController
 
     public void enterName(ActionEvent event) throws Exception
     {
-        FXMLLoader loader =new  FXMLLoader(getClass().getResource("UserMenu.fxml"));
-        Parent root = (Parent) loader.load();
-        UserMenuController userMenu = new UserMenuController();
-        userMenu = loader.getController();
-        System.out.println("passed to menu");
-        userMenu.setMusic(music);
-        userMenu.setAudioEffect(gameAudio);
-        
+        Parent root = FXMLLoader.load(getClass().getResource("UserMenu.fxml"));
         String username = createName.getText();
 
         if(username.contains("<UN>") ||
@@ -305,18 +283,17 @@ public class StartUpMenuController
             else
             {
                 Player newP = new Player(username, 0, new Weapon(1, "shield", 0),
-                        new Character("Captain America", 0), 0, new ArrayList<Weapon>(), new ArrayList<Character>());
+                        new Character("CA", 0), 0, new ArrayList<Weapon>(), new ArrayList<Character>());
                 s.writeNewUser(newP);
 
-
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
+                Parent root1 = (Parent) loader.load();
                 UserMenuController userMenuController = new UserMenuController();
                 userMenuController = loader.getController();
                 userMenuController.setPlayer(player);
-                userMenuController.setMusic(music);
-                userMenuController.setAudioEffect(gameAudio);
 
                 Stage stage = (Stage) createName.getScene().getWindow();
-                Scene scene = new Scene(root);
+                Scene scene = new Scene(root1);
                 stage.setScene(scene);
             }
         }
@@ -326,14 +303,7 @@ public class StartUpMenuController
         System.out.println("go to start");
         Stage window;
         window = (Stage) backFromLoad.getScene().getWindow();
-        
-        //load fxml and set audios
-        FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
-        Parent root = (Parent) loader.load();
-        StartUpMenuController startUpMenuController = new StartUpMenuController();
-        startUpMenuController = loader.getController();
-        startUpMenuController.setMusic(music);
-        startUpMenuController.setAudioEffect(gameAudio);
+        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
 
         window.setScene(new Scene(root));
     }
@@ -343,34 +313,11 @@ public class StartUpMenuController
         Stage window;
         window = (Stage) backFromCreate.getScene().getWindow();
         System.out.println("get the window");
-        
-        //load fxml and set audios
-        FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
-        Parent root = (Parent) loader.load();
-        StartUpMenuController startUpMenuController = new StartUpMenuController();
-        startUpMenuController = loader.getController();
-        startUpMenuController.setMusic(music);
-        startUpMenuController.setAudioEffect(gameAudio);
-        
+        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
         System.out.println("get the root");
-              
         window.setScene(new Scene(root));
     }
 
-    public void setMusic(Audio musicAudio) {
-        System.out.println( "effect setted in start");
-        music = musicAudio;
-    }
-     public void settleMute()
-    {
-        mute.setVisible(false);
-        play.setVisible(true);
-    }
 
-    public void setAudioEffect(Audio audioEffect) {
-        System.out.println( "music setted in start");
-        gameAudio = audioEffect;
-
-    }
 
 }
