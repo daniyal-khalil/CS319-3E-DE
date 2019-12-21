@@ -23,7 +23,7 @@ public class ShopandModeController extends UserMenuController
     @FXML
     private Button backFromModes, backFromStore;
     @FXML
-    private ImageView choosen;
+    private ImageView choosen, back;
     @FXML
     private ListView<ImageView> images, images1;
     @FXML
