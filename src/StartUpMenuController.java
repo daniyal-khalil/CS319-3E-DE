@@ -30,7 +30,7 @@ public class StartUpMenuController
     @FXML
     private Button loadProfile;
     @FXML
-    private ImageView back;
+    private ImageView back, back1;
     @FXML
     private TextField createName;
     @FXML
@@ -324,6 +324,15 @@ public class StartUpMenuController
         System.out.println("go to start");
         Stage window;
         window = (Stage) back.getScene().getWindow();
+        System.out.println("get the window");
+        Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
+        System.out.println("get the root");
+        window.setScene(new Scene(root));
+    }
+        public void goBack1(MouseEvent mouseEvent) throws IOException {
+        System.out.println("go to start");
+        Stage window;
+        window = (Stage) back1.getScene().getWindow();
         System.out.println("get the window");
         Parent root = FXMLLoader.load(getClass().getResource("StartUpMenu.fxml"));
         System.out.println("get the root");
