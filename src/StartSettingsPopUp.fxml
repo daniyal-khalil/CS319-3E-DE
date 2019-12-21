@@ -7,21 +7,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane nodeOrientation="RIGHT_TO_LEFT" prefHeight="257.0" prefWidth="423.0" style="-fx-background-color: #E5E8E8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane nodeOrientation="RIGHT_TO_LEFT" prefHeight="257.0" prefWidth="423.0" style="-fx-background-color: #E5E8E8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserMenuController">
     <children>
-      <ImageView fitHeight="569.0" fitWidth="826.0" layoutX="-373.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/backgroun.jpg" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="569.0" fitWidth="826.0" layoutX="-373.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/backgroun.jpg" />
+            </image>
+        </ImageView>
         <Label alignment="CENTER_RIGHT" ellipsisString="" layoutX="55.0" layoutY="21.0" prefHeight="37.0" prefWidth="353.0" text="Sound effects" textFill="#fffefe" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
             <font>
                 <Font name="Haettenschweiler" size="30.0" />
             </font>
         </Label>
-        <Pane layoutX="24.0" layoutY="62.0" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #fafafa;">
+        <Pane layoutX="24.0" layoutY="62.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #fafafa;">
             <children>
-                <Slider layoutX="29.0" layoutY="22.0" prefHeight="15.0" prefWidth="328.0" />
+                <Slider fx:id="sound" layoutX="26.0" layoutY="18.0" majorTickUnit="25f" minorTickCount="2" prefHeight="14.0" prefWidth="328.0" showTickMarks="true" value="50" />
             </children>
         </Pane>
         <Label alignment="CENTER_RIGHT" ellipsisString="" layoutX="55.0" layoutY="143.0" prefHeight="37.0" prefWidth="353.0" text="Music" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
@@ -29,9 +29,9 @@
                 <Font name="Haettenschweiler" size="30.0" />
             </font>
         </Label>
-        <Pane layoutX="24.0" layoutY="184.0" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #fafafa;">
+        <Pane layoutX="24.0" layoutY="184.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #fafafa;">
             <children>
-                <Slider layoutX="29.0" layoutY="22.0" prefHeight="15.0" prefWidth="328.0" />
+                <Slider fx:id="musicAudio" layoutX="29.0" layoutY="18.0" minorTickCount="2" prefHeight="15.0" prefWidth="328.0" showTickMarks="true" value="50.0" />
             </children>
         </Pane>
     </children>
