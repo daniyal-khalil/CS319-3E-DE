@@ -29,8 +29,8 @@ import java.util.ArrayList;
 
 public class UserMenuController {
 
-    private final double MIN = 0d;
-    private final double MAX = 100d;
+    private Audio gameAudio;
+    private Audio music;
     private Player player;
     @FXML
     private Button newGame, store, modes, settings;
@@ -57,43 +57,25 @@ public class UserMenuController {
     }
 
 
-    public void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
+    ublic void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("startSettingsPopUp.fxml"));
+        //try{gameAudio.mute();}catch(NullPointerException e){  System.out.println("cat died");}
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("startSettingsPopUp.fxml"));
+
+        Parent root = (Parent) loader.load();
+        UserMenuController userMenu = new UserMenuController();
+        userMenu = loader.getController();
+        System.out.println("passed to pop");
+        userMenu.setAudioEffect(gameAudio);
+        userMenu.setMusic(music);
+        ((Slider)root.lookup("#music")).valueProperty().addListener((observable, oldValue, newValue) -> {
+            changeVolume(newValue.intValue());
+
+        });
         Stage window = new Stage();
         System.out.println("Meow");
         Scene scene = new Scene(root);
-        sound = new Slider(0,1000,500);
-        effects = new Slider(0,100,50);
-        ((Slider)root.lookup("#sound")).setMin(MIN);
-        ((Slider)root.lookup("#sound")).setMax(MAX);
-        ((Slider)root.lookup("#sound")).setValue(50);
-        //     ((Slider)root.lookup("#sound")).sliderValueProperty().addListener((ov) -> {
-        //       if (((Slider)root.lookup("#sound")).isTheValueChanging()) {
-        //     }
-        // });
-
-//        ((Slider)root.lookup("#sound")).setValue(50);
-//        ((Slider)root.lookup("#sound")).setShowTickMarks(true);
-//        //sound.setShowTickMarks(true);
-//
-//        ((Slider)root.lookup("#sound")).setShowTickLabels(true);
-//        ((Slider)root.lookup("#effects")).setShowTickLabels(true);
-//        ((Slider)root.lookup("#sound")).setMajorTickUnit(25f);
-//        ((Slider)root.lookup("#sound")).setBlockIncrement(1f);
-//        ((Slider)root.lookup("#effects")).setMajorTickUnit(25f);
-//        ((Slider)root.lookup("#effects")).setBlockIncrement(1f);
-        // ((Slider)root.lookup("#sound")).setPrefHeight(30);
-
-        ((Slider)root.lookup("#sound")).setOrientation(javafx.geometry.Orientation.HORIZONTAL);
-        //slide.setShowTickLabels(true);
-        ///slide.setShowTickMarks(true);
-        //((Slider)root.lookup("#sound")).setSnapToTicks(true);
-        ((Slider)root.lookup("#sound")).valueProperty().addListener((observable, oldValue, newValue) -> {
-
-            System.out.println(newValue.intValue());
-        });
-
+        
         window.initModality(Modality.APPLICATION_MODAL);
         window.show();
         window.setScene(scene);
@@ -197,5 +179,16 @@ public class UserMenuController {
         items1 = FXCollections.observableArrayList(imgs1);
         ((ListView)root.lookup("#images1")).setItems(items1);
         window.setScene(new Scene(root));
+    }
+    
+     public void setMusic(Audio musicAudio) {
+        System.out.println( "effect setted in user");
+        music = musicAudio;
+    }
+
+    public void setAudioEffect(Audio audioEffect) {
+        System.out.println( "music setted in user");
+        gameAudio = audioEffect;
+
     }
 }
