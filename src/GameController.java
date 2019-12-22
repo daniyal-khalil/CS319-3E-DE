@@ -31,19 +31,20 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class GameController {
-    
-    private Audio gameAudio;
-    private Audio music;
-    
+
     @FXML
     public Pane gamePanel;
     @FXML
     private ImageView hero;
+    @FXML
+    private ImageView heroMini;
+    @FXML
+    private HBox bottomBox;
+
 
     private Stage gameStage;
-    private Player player;
+    private Pane gameOver;
 
-    private ArrayList<Human> humans;
 
 
 
@@ -60,11 +61,11 @@ public class GameController {
     private Button pauseButton;
 
 
-    private ImageView weapon;
+    private ImageView weapon, weaponMini;
 
-    private  Group dungeon;
+    private  Group dungeon, dungeonMini;
 
-    private Pane root;
+    private Pane root, rootMini;
 
     @FXML
     private Parent gamePane;
@@ -74,16 +75,14 @@ public class GameController {
 
     private int score;
 
-    private AnimationTimer timer;
-
-    private ArrayList<ImageView> enemy;
+    private ArrayList<ImageView> enemy, enemyMini;
     private String direction, shootDirection;
 
     private Image img2;
 
-    private double heroX, heroY;
+    private double heroX, heroY, heroMiniX, heroMiniY;
 
-    private ArrayList<String> enemyDirection;
+    private ArrayList<String> enemyDirection, enemyMiniDirection;
 
     private static final double W = 1000, H = 650;
 
@@ -107,11 +106,6 @@ public class GameController {
             window.initModality(Modality.APPLICATION_MODAL);
             window.show();
         }
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-        System.out.println(this.player.getCurrentWeapon().getName());
     }
 
     public void exittingGame(ActionEvent event)throws Exception{
@@ -243,6 +237,7 @@ public class GameController {
 //
 //        window.setScene(new Scene(root));
         score = 0;
+        gameOver = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
         shootDirection = "down";
         direction = "down";
         enemyDirection = new ArrayList<String>();
@@ -250,17 +245,34 @@ public class GameController {
             enemyDirection.add("");
         }
 
-        humans = new ArrayList<Human>();
-
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        weapon = new ImageView(setImage(player.getCurrentWeapon().getName() + ".gif")) ;
+        weapon = new ImageView(setImage("CA_SHIELD.gif")) ;
         enemy = new ArrayList<ImageView>();
-        img2 = setImage(player.getCurrentCharacter().getName() + "_DOWN_R.png");
+        enemyMini = new ArrayList<ImageView>();
+        img2 = setImage("CA_DOWN_R.png");
         hero = new ImageView(img2);
         enemy.add(new ImageView(setImage("HY_R.gif")));
+        enemyMini.add(new ImageView(setImage("HY_R.gif")));
+        (enemyMini.get(enemyMini.size() - 1)).setFitHeight(10);
+        (enemyMini.get(enemyMini.size() - 1)).setFitWidth(10);
         ImageView gameBack = new ImageView(setImage("gameBack.png"));
         gameBack.resize(900,400);
-        Rectangle background = new Rectangle(2000, 500, new LinearGradient(0, 0, 100, 0, false, CycleMethod.REPEAT, new Stop(0, Color.WHITE), new Stop(100, Color.BLUE)));
+        Rectangle background = new Rectangle(2000, 500, new LinearGradient(0, 0, 2000, 0, false, CycleMethod.REPEAT, new Stop(0, Color.WHITE), new Stop(100, Color.BLUE)));
+        Rectangle backMini = new Rectangle(200, 50, new LinearGradient(0, 0, 1000, 0, false, CycleMethod.REPEAT, new Stop(0, Color.WHITE), new Stop(100, Color.BLUE)));
+
+
+        heroMini = new ImageView(img2);
+        heroMini.setFitHeight(10);
+        heroMini.setFitWidth(10);
+        weapon = new ImageView(setImage("CA_SHIELD.gif")) ;
+        weaponMini = weapon;
+
+        dungeonMini = new Group(backMini, heroMini, weaponMini);
+        dungeonMini.setManaged(false);
+        dungeonMini.minWidth(200.0);
+        dungeonMini.minHeight(50.0);
+        dungeonMini.maxHeight(50.0);
+        dungeonMini.getChildren().addAll(enemyMini);
 
         dungeon = new Group(background, hero, weapon);
         dungeon.setAutoSizeChildren(true);
@@ -274,7 +286,8 @@ public class GameController {
         Label bottomLabel = new Label();
         bottomLabel.setText("bottom");
         HBox topBox = new HBox();
-        HBox bottomBox = new HBox();
+
+        rootMini = new HBox(dungeonMini);
         topBox.getChildren().add(topLabel);
         topBox.setPrefSize(900, 60);
         root = new HBox(dungeon);
@@ -283,48 +296,90 @@ public class GameController {
         root.setMinSize(900, 400);
         root.setMaxSize(900, 400);
 
+        rootMini.setMinSize(90,40);
+        rootMini.setMaxSize(90,40);
+
         heroX = hero.getLayoutX();
         heroY = hero.getLayoutY();
+        heroMiniX = heroMini.getLayoutX();
+        heroMiniY = heroMini.getLayoutY();
 
 
-        gamePane = new AnchorPane(root, topBox, bottomBox);
+
+        dungeon.minWidth(2000.0);
+        dungeon.minHeight(500.0);
+        dungeon.maxHeight(500.0);
+//        minimap = new HBox(dungeon);
+        gamePane = new AnchorPane(root, topBox, rootMini);
+        AnchorPane.setBottomAnchor(rootMini, 10.0);
+        AnchorPane.setLeftAnchor(rootMini, 400.0);
         AnchorPane.setTopAnchor(root, 60.0);
+//        AnchorPane.setTopAnchor(minimap,50.0);
         AnchorPane.setBottomAnchor(topBox, 550.0);
+//        root.setScaleY(.1);
+//        root.setScaleX(.1);
 
-
-
+//        root
+//        dungeon.minWidth(200.0);
+//        dungeon.minHeight(50.0);
+//        dungeon.maxHeight(50.0);
+//        dungeon.setLayoutX(0.1);
+//        HBox test = new HBox(dungeon);
+//        Pane minimapPane = new AnchorPane(test);
+//        Pane rootroot = new FlowPane();
+//        rootroot.getChildren().addAll(minimapPane,gamePane);
+//        AnchorPane.setBottomAnchor();
 
         weapon.setVisible(false);
         moveHeroTo(W / 2, H / 2);
-
+        heroMini.setLayoutY(26);
+        heroMini.setLayoutX(45);
         Scene scene = new Scene(gamePane, W, H, Color.FORESTGREEN);
+
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
                     case UP:  {
-                        if (!goNorth)
-                            hero.setImage(setImage(player.getCurrentCharacter().getName() + "_UP.gif"));
+                        if (!goNorth) {
+                            hero.setImage(setImage("CA_UP.gif"));
+                            heroMini.setImage(setImage("CA_UP.gif"));
+                            heroMini.setFitHeight(10);
+                            heroMini.setFitWidth(10);
+                        }
                         direction = "up";
                         goNorth = true;
                     } break;
                     case DOWN:  {
 
-                        if (!goSouth)
-                            hero.setImage(setImage(player.getCurrentCharacter().getName() + "_DOWN.gif"));
+                        if (!goSouth) {
+                            hero.setImage(setImage("CA_DOWN.gif"));
+                            heroMini.setImage(setImage("CA_DOWN.gif"));
+                            heroMini.setFitHeight(10);
+                            heroMini.setFitWidth(10);
+                        }
                         direction = "down";
                         goSouth = true; break;
 
                     }
                     case LEFT:  {
-                        if (!goWest)
-                            hero.setImage(setImage(player.getCurrentCharacter().getName() + "_LEFT.gif"));
+                        if (!goWest) {
+                            hero.setImage(setImage("CA_LEFT.gif"));
+                            heroMini.setImage(setImage("CA_LEFT.gif"));
+                            heroMini.setFitHeight(10);
+                            heroMini.setFitWidth(10);
+                        }
+
                         direction = "left";
                         goWest  = true;
                     } break;
                     case RIGHT: {
-                        if (!goEast)
-                            hero.setImage(setImage(player.getCurrentCharacter().getName() + "_RIGHT.gif"));
+                        if (!goEast) {
+                            hero.setImage(setImage("CA_RIGHT.gif"));
+                            heroMini.setImage(setImage("CA_UP.gif"));
+                            heroMini.setFitHeight(10);
+                            heroMini.setFitWidth(10);
+                        }
                         direction = "right";
                         goEast  = true;
                     } break;
@@ -349,19 +404,31 @@ public class GameController {
                 switch (event.getCode()) {
                     case UP:    {
 
-                        hero.setImage(setImage(player.getCurrentCharacter().getName() + "_UP_R.png"));
+//                        hero.setImage(setImage("CA_UP_R.png"));
+                        heroMini.setImage(setImage("CA_UP_R.png"));
+                        heroMini.setFitHeight(10);
+                        heroMini.setFitWidth(10);
                         goNorth = false;
                     } break;
                     case DOWN:  {
-                        hero.setImage(setImage(player.getCurrentCharacter().getName() + "_DOWN_R.png"));
+//                        hero.setImage(setImage("CA_DOWN_R.png"));
+                        heroMini.setImage(setImage("CA_DOWN_R.png"));
+                        heroMini.setFitHeight(10);
+                        heroMini.setFitWidth(10);
                         goSouth = false;
                     } break;
                     case LEFT:  {
-                        hero.setImage(setImage(player.getCurrentCharacter().getName() + "_LEFT_R.png"));
+//                        hero.setImage(setImage("CA_LEFT_R.png"));
+                        heroMini.setImage(setImage("CA_LEFT_R.png"));
+                        heroMini.setFitHeight(10);
+                        heroMini.setFitWidth(10);
                         goWest  = false;
                     } break;
                     case RIGHT: {
-                        hero.setImage(setImage(player.getCurrentCharacter().getName() + "_RIGHT_R.png"));
+//                        hero.setImage(setImage("CA_RIGHT_R.png"));
+                        heroMini.setImage(setImage("CA_RIGHT_R.png"));
+                        heroMini.setFitHeight(10);
+                        heroMini.setFitWidth(10);
                         goEast  = false;
                     } break;
 //                    case SHIFT: running = false; break;
@@ -372,39 +439,42 @@ public class GameController {
         stage.setScene(scene);
         stage.show();
 
-        timer = new AnimationTimer()  {
+        AnimationTimer timer = new AnimationTimer()  {
             @Override
             public void handle(long now) {
                 int dx = 0, dy = 0;
-                spawnEnemies();
-                    if (collision()) {
-                        try {
-                            gameOver();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                spawnEnemies();;
+                collision();
                 topLabel.setText("Score: " + score);
+                over = collision();
+
                 followTheUser();
                 if (goNorth) {
                     if (heroY > 0) {
                         hero.relocate(hero.getLayoutX(), hero.getLayoutY() - 3);
+                        heroMini.relocate(heroMini.getLayoutX(), heroMini.getLayoutY() - .3);
                         heroY -= 3;
+                        heroMiniY -= .3;
                     }
                 }
                 if (goSouth) {
                     if (heroY < 409) {
                         hero.relocate(hero.getLayoutX(), hero.getLayoutY() + 3);
+                        heroMini.relocate(heroMini.getLayoutX(), heroMini.getLayoutY() + .3);
                         heroY += 3;
+                        heroMiniY -= .3;
                     }
                 }
                 if (goEast)  {
-
-                    if (heroX < 1550 && heroX > 500)
+                    if (heroX < 1550 && heroX > 500) {
                         dungeon.setTranslateX(dungeon.getTranslateX() - 3);
+//                        dungeonMini.setTranslateX(dungeonMini.getTranslateX() - .3);
+                    }
                     if (heroX < 2000) {
                         hero.setTranslateX(hero.getTranslateX() + 3);
                         heroX += 3;
+                        heroMini.setTranslateX(heroMini.getTranslateX() + .3);
+                        heroMiniX += .3;
                     }
                     System.out.println("HeroX" + heroX);
                     System.out.println("Enemy" + enemy.get(0).getLayoutX());
@@ -415,11 +485,13 @@ public class GameController {
 
                     if (heroX > 0 ) {
                         hero.setTranslateX(hero.getTranslateX() - 3);
+                        heroMini.setTranslateX(heroMini.getTranslateX() - .3);
                         heroX -= 3;
+                        heroMiniX -= .3;
                     }
-                    if (heroX > 450 && heroX < 1500)
+                    if (heroX > 500 && heroX < 1500)
                         dungeon.setTranslateX(dungeon.getTranslateX() + 3 );
-
+//                        dungeonMini.setTranslateX(dungeonMini.getTranslateX() + .3);
                 }
 //                if (running) { dx *= 3; dy *= 3; }
                 if (shoot && weapon.isVisible())  {
@@ -436,21 +508,17 @@ public class GameController {
             }
         };
         timer.start();
+
+        if (collision()) {
+            stage.setScene(new Scene(gameOver));
+        }
     }
 
 
 
 
-    public void gameOver() throws Exception {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
-            Parent root = loader.load();
-            GameOverController gameOverController = new GameOverController();
-            gameOverController = loader.getController();
-            gameOverController.setPlayer(player);
-            gameOverController.setScore(score);
-            gameOverController.setScoreLabel(score);
-            gameStage.setScene(new Scene(root));
-    }
+
+
 
     private void moveHeroBy(int dx, int dy) {
         if (dx == 0 && dy == 0) return;
@@ -501,9 +569,18 @@ public class GameController {
         if (enemy.size() < 2 ) {
             if (enemy.size() < 2) {
                 System.out.println("Sup");
-                enemy.add(new ImageView(setImage("HY_R.gif")));
+                enemy.add(new ImageView(setImage("HY_D.gif")));
+                enemyMini.add(new ImageView((setImage("HY_D.gif"))));
+
+
+                (enemyMini.get(enemyMini.size() - 1)).relocate(rand_x/10, rand_y/10);
+
+                (enemyMini.get(enemyMini.size() - 1)).setFitHeight(10);
+                (enemyMini.get(enemyMini.size() - 1)).setFitWidth(10);
                 (enemy.get(enemy.size()-1)).relocate(rand_x, rand_y);
                 dungeon.getChildren().add(enemy.get(enemy.size()-1));
+                dungeonMini.getChildren().add(enemyMini.get(enemyMini.size()-1));
+
             }
 //            if (enemy.size() >= 2) {
 //                if (rand % 1000001 == 0) {
@@ -529,21 +606,30 @@ public class GameController {
        for (int i = 0; i < enemy.size(); i++) {
            if (enemy.get(i).getLayoutX() < heroX) {
                enemy.get(i).relocate(enemy.get(i).getLayoutX()+0.5, enemy.get(i).getLayoutY());
+               enemyMini.get(i).relocate(enemyMini.get(i).getLayoutX() + 0.05, enemyMini.get(i).getLayoutY());
                if (!(enemyDirection.get(i)).equals("right")) {
                     System.out.println("Enemy" + i + "X: " + enemy.get(i).getLayoutX());
                    enemy.get(i).setImage(setImage("HY_R.gif"));
+                   enemyMini.get(i).setImage(setImage("HY_R.gif"));
+                   (enemyMini.get(enemyMini.size() - 1)).setFitHeight(10);
+                   (enemyMini.get(enemyMini.size() - 1)).setFitWidth(10);
                    enemyDirection.set(i, "right");
                }
            }
            else if (enemy.get(i).getLayoutX() > heroX) {
                enemy.get(i).relocate(enemy.get(i).getLayoutX()-0.5, enemy.get(i).getLayoutY());
+               enemyMini.get(i).relocate(enemyMini.get(i).getLayoutX()-0.05, enemyMini.get(i).getLayoutY());
                if (!(enemyDirection.get(i)).equals("left")) {
                    enemy.get(i).setImage(setImage("HY_L.gif"));
+                   enemyMini.get(i).setImage(setImage("HY_L.gif"));
+                   (enemyMini.get(enemyMini.size() - 1)).setFitHeight(10);
+                   (enemyMini.get(enemyMini.size() - 1)).setFitWidth(10);
                    enemyDirection.set(i, "left");
                }
            }
            if (enemy.get(i).getLayoutY() > heroY) {
                enemy.get(i).relocate(enemy.get(i).getLayoutX(),enemy.get(i).getLayoutY() - 0.5);
+               enemyMini.get(i).relocate(enemyMini.get(i).getLayoutX(),enemyMini.get(i).getLayoutY() - 0.05);
 
 //               if (!(enemyDirection.get(i)).equals("up")) {
 //                   enemy.get(i).setImage(setImage("HY_U"));
@@ -552,6 +638,7 @@ public class GameController {
            }
            else if (enemy.get(i).getLayoutY() < heroY) {
                enemy.get(i).relocate(enemy.get(i).getLayoutX(),enemy.get(i).getLayoutY() + 0.5);
+               enemyMini.get(i).relocate(enemyMini.get(i).getLayoutX(),enemyMini.get(i).getLayoutY() + 0.05);
 //               if (!(enemyDirection.get(i)).equals("down")) {
 //                   enemy.get(i).setImage(setImage("HY_D"));
 //                   enemyDirection.set(i, "down");
@@ -567,6 +654,8 @@ public class GameController {
             if ((weapon.getLayoutX() <= enemy.get(i).getLayoutX() + 70 && weapon.getLayoutX() >= enemy.get(i).getLayoutX() ) && (weapon.getLayoutY() >= enemy.get(i).getLayoutY() && (weapon.getLayoutY() <= enemy.get(i).getLayoutY() + 100)) ) {
                 if (weapon.isVisible()) {
                     dungeon.getChildren().remove(enemy.get(i));
+                    dungeonMini.getChildren().remove(enemyMini.get(i));
+                    enemyMini.remove(i);
                     enemy.remove(i);
                     System.out.println("YAHAN");
                     enemyDirection.set(i, "");
@@ -577,25 +666,15 @@ public class GameController {
             }
             if (((heroX <= enemy.get(i).getLayoutX() + 10) && heroX >= enemy.get(i).getLayoutX() ) && (heroY >= enemy.get(i).getLayoutY() && (heroY <= enemy.get(i).getLayoutY() + 10))) {
                 System.out.println("NYAH");
-                heroX= -1000;
                 return true;
             }
         }
         return false;
     }
 
-    public void spawnHumans() {
-        for (int i = 0; )
+    public void gameOver(Stage stage) {
+        if (over) {
+            stage.setScene(new Scene(gameOver));
+        }
     }
-    public void setMusic(Audio musicAudio) {
-        System.out.println( "effect setted in user");
-        music = musicAudio;
-    }
-
-    public void setAudioEffect(Audio audioEffect) {
-        System.out.println( "music setted in user");
-        gameAudio = audioEffect;
-
-    }
-
 }
