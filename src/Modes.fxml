@@ -39,5 +39,10 @@
                 <Font size="25.0" />
             </font>
         </RadioButton>
+        <ImageView fx:id="back1" onMousePressed="#fromModetoMenu" fitHeight="79.0" fitWidth="31.0" layoutX="30.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@icons/back.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>
