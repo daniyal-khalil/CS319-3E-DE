@@ -37,7 +37,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <ImageView fx:id="back" onMousePressed="#goBack" fitHeight="79.0" fitWidth="31.0" layoutX="961.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="back" onMousePressed="#fromShopToMenu" fitHeight="79.0" fitWidth="31.0" layoutX="961.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons/back.png" />
          </image>
