@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -24,6 +25,7 @@ import org.omg.CORBA.Environment;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -33,7 +35,7 @@ public class UserMenuController {
     private Audio music;
     private Player player;
     @FXML
-    private Button newGame, store, modes, settings;
+    private Button newGame, store, modes, settings, back;
     @FXML
     Slider sound;
     @FXML
@@ -59,16 +61,15 @@ public class UserMenuController {
         gameAudio.play();
 
     }
-    
-    public void menuToStart(MouseEvent mouseEvent)
-    {
+
+    public void menuToStart(MouseEvent mouseEvent) throws IOException {
         Stage window;
-        window = (Stage) backFromUser.getScene().getWindow();
+        window = (Stage) back.getScene().getWindow();
 
 
         FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
+        Parent root = (Parent) loader.load();
 
-        Pane root = loader.load();
         StartUpMenuController start = new StartUpMenuController();
         start = loader.getController();
         start = loader.getController();
@@ -115,14 +116,14 @@ public class UserMenuController {
         window.setScene(scene);
 
     }
-    
+
 
     public void goingToModes(ActionEvent event)throws Exception{
 
         System.out.println("From controller");
         Stage window;
         window = (Stage) modes.getScene().getWindow();
-        
+
         //load fxml and set audios
         FXMLLoader loader =new  FXMLLoader(getClass().getResource("Modes.fxml"));
         Parent root = (Parent) loader.load();
@@ -131,7 +132,7 @@ public class UserMenuController {
         shop.setAudioEffect(gameAudio);
         shop.setPlayer(player);
         shop.setMusic(music);
-        
+
         window.setScene(new Scene(root));
     }
 
@@ -147,7 +148,7 @@ public class UserMenuController {
         Stage window;
 
         window = (Stage) store.getScene().getWindow();
-        
+
         //load fxml and set audios
         FXMLLoader loader =new  FXMLLoader(getClass().getResource("Shop.fxml"));
         Parent root = (Parent) loader.load();
@@ -226,8 +227,8 @@ public class UserMenuController {
         ((ListView)root.lookup("#images1")).setItems(items1);
         window.setScene(new Scene(root));
     }
-    
-     public void setMusic(Audio musicAudio) {
+
+    public void setMusic(Audio musicAudio) {
         System.out.println( "effect setted in user");
         music = musicAudio;
     }
