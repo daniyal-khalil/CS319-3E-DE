@@ -62,7 +62,19 @@ public class UserMenuController {
     
     public void menuToStart(MouseEvent mouseEvent)
     {
-        System.out.println("okay");
+        Stage window;
+        window = (Stage) backFromUser.getScene().getWindow();
+
+
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
+
+        Pane root = loader.load();
+        StartUpMenuController start = new StartUpMenuController();
+        start = loader.getController();
+        start = loader.getController();
+        start.setAudioEffect(gameAudio);
+        start.setMusic(music);
+        window.setScene(new Scene(root));
     }
 
     public void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
