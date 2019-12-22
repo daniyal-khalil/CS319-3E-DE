@@ -23,7 +23,7 @@ public class ShopandModeController extends UserMenuController
     @FXML
     private Button backFromModes, backFromStore;
     @FXML
-    private ImageView choosen, back;
+    private ImageView choosen, back, back1;
     @FXML
     private ListView<ImageView> images, images1;
     @FXML
@@ -226,6 +226,30 @@ public class ShopandModeController extends UserMenuController
         userMenuController.setPlayer(player);
         userMenuController.setAudioEffect(gameAudio);
         userMenuController.setMusic(music);
+        window.setScene(new Scene(root));
+    }
+    
+    public void fromShopToMenu(MouseEvent mouseEvent) throws IOException {
+        System.out.println("From shop to controller");
+        Stage window;
+        window = (Stage) back.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        Pane root = loader.load();
+        UserMenuController userMenuController = new UserMenuController();
+        userMenuController = loader.getController();
+        userMenuController.setPlayer(player);
+        window.setScene(new Scene(root));
+    }
+
+    public void fromModetoMenu(MouseEvent mouseEvent) throws IOException {
+        System.out.println("From controller");
+        Stage window;
+        window = (Stage) back1.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        Pane root = loader.load();
+        UserMenuController userMenuController = new UserMenuController();
+        userMenuController = loader.getController();
+        userMenuController.setPlayer(player);
         window.setScene(new Scene(root));
     }
 }
