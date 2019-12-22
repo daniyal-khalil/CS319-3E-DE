@@ -63,10 +63,20 @@ public class UserMenuController {
 
     public void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
     {
+
         //try{gameAudio.mute();}catch(NullPointerException e){  System.out.println("cat died");}
         FXMLLoader loader =new  FXMLLoader(getClass().getResource("startSettingsPopUp.fxml"));
 
         Parent root = (Parent) loader.load();
+
+        double volume = 100 * music.getVol();
+        int vol = (int) volume;
+        ((Slider)root.lookup("#musicAudio")).setValue(volume);
+
+        volume = 100 * gameAudio.getVol();
+        vol = (int) volume;
+        ((Slider)root.lookup("#sound")).setValue(volume);
+
         UserMenuController userMenu = new UserMenuController();
         userMenu = loader.getController();
         System.out.println("passed to pop");
@@ -74,12 +84,16 @@ public class UserMenuController {
         userMenu.setMusic(music);
         ((Slider)root.lookup("#musicAudio")).valueProperty().addListener((observable, oldValue, newValue) -> {
             music.changeVolume(newValue.intValue());
-
         });
+
+        ((Slider)root.lookup("#sound")).valueProperty().addListener((observable, oldValue, newValue) -> {
+            gameAudio.changeVolume(newValue.intValue());
+        });
+
         Stage window = new Stage();
         System.out.println("Meow");
         Scene scene = new Scene(root);
-        
+
         window.initModality(Modality.APPLICATION_MODAL);
         window.show();
         window.setScene(scene);
