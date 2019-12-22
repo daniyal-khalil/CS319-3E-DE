@@ -59,7 +59,11 @@ public class UserMenuController {
         gameAudio.play();
 
     }
-
+    
+    public void menuToStart(MouseEvent mouseEvent)
+    {
+        System.out.println("okay");
+    }
 
     public void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
     {
@@ -99,6 +103,7 @@ public class UserMenuController {
         window.setScene(scene);
 
     }
+    
 
     public void goingToModes(ActionEvent event)throws Exception{
 
@@ -112,6 +117,7 @@ public class UserMenuController {
         ShopandModeController shop = new ShopandModeController();
         shop = loader.getController();
         shop.setAudioEffect(gameAudio);
+        shop.setPlayer(player);
         shop.setMusic(music);
         
         window.setScene(new Scene(root));
