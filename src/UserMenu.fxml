@@ -40,9 +40,9 @@
             </font>
         </Button>
         <Button layoutX="940.0" layoutY="25.0" mnemonicParsing="false" text="back" />
-        <ImageView fitHeight="429.0" fitWidth="383.0" layoutX="584.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="back" onMousePressed="#menuToStart" fitHeight="79.0" fitWidth="31.0" layoutX="961.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@images/userMenu.jpg" />
+                <Image url="@icons/back.png" />
             </image>
         </ImageView>
     </children>
