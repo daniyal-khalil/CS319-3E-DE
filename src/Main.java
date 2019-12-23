@@ -9,9 +9,13 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
+    /**
+     * starts the game itself
+     * @param primaryStage is main stage of the game.
+     */
     public void start(Stage primaryStage) throws Exception{
-        Audio music = new Audio("C:\\Users\\Asus\\Desktop\\starman.mp3");
-        Audio gameAudio = new Audio("C:\\Users\\Asus\\Desktop\\starman.mp3");
+       Audio music = new Audio("src\\sample\\soundtrack.mp3");
+       Audio gameAudio = new Audio("src\\sample\\soundtrack.mp3");
 
         FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
         Parent root = (Parent) loader.load();
@@ -22,11 +26,11 @@ public class Main extends Application {
         startUpMenuController.setAudioEffect(gameAudio);
         startUpMenuController.setMusic(music);
         startUpMenuController.settleMute();
-        
+
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1024, 720));
         primaryStage.show();
-        
+
         music.playContinously();
     }
 

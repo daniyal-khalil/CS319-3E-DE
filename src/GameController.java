@@ -27,10 +27,14 @@ import javafx.scene.text.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * This is the main game-play class
+ */
 public class GameController {
 
     @FXML
@@ -38,7 +42,7 @@ public class GameController {
     @FXML
     private ImageView hero, heroMini;
 
-
+    private Scene pauseScene;
     private Audio music;
     private Audio gameAudio;
 
@@ -57,8 +61,7 @@ public class GameController {
 
     @FXML
     private Button continueGame, exitGame, newGamePlay, exitApp;
-    @FXML
-    private Button pauseButton;
+
 
 
     private  Group dungeon, dungeonMini;
@@ -79,28 +82,58 @@ public class GameController {
 
     private int lives;
 
-    private Scene pauseScene;
 
+    private String currentMode;
     private Image img2;
 
     private double heroX, heroY, heroMiniX, heroMiniY;
 
     private ArrayList<String> enemyDirection;
 
+    private boolean play;
+
     private static final double W = 1000, H = 650;
 
-
+    private Audio frizzAudio, shootAudio;
 
 
     boolean goNorth, goSouth, goEast, goWest;
 
+    /**
+     * This a method for setting the play
+     * @param play if  plays the true
+     */
+    public void setPlay(boolean play) {
+        this.play = play;
+    }
 
+    /**
+     * This method sets the current mode that is assogned on a previous screen
+     * @param currentMode is sent from previous screen
+     */
+    public void setCurrentMode(String currentMode) {
+        this.currentMode = currentMode;
+    }
+
+    /**
+     * This pauses game
+     * @param key
+     * @throws Exception
+     */
     public void pause(KeyEvent key) throws Exception{
         if ( key.getCode() == KeyCode.ENTER ) {
             timer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Pause.fxml"));
             Parent root = loader.load();
             GameController gameController = new GameController();
+            gameController = loader.getController();
+            gameController.setPlayer(player);
+            gameController.setAudioEffect(gameAudio);
+            gameController.setMusic(music);
+            gameController.setCurrentMode(currentMode);
+            gameController.setPlay(play);
+
+            gameController.setGameStage(gameStage);
             Stage window = new Stage();
             System.out.println("Meow");
             Scene scene = new Scene(root);
@@ -113,22 +146,67 @@ public class GameController {
     }
 
 
+    /**
+     * This sets the player for associating relevant actions
+     * @param player the player that is assigned in the startupmenucontroller
+     */
     public void setPlayer(Player player) {
         this.player = player;
         System.out.println(this.player.getCurrentWeapon().getName());
     }
 
+    /**
+     * This sets the public gamestage goes to pause
+     * @param gameStage
+     */
+    public void setGameStage(Stage gameStage) {
+        this.gameStage = gameStage;
+    }
 
-    private boolean over;
-
+    /**
+     * This method is for resuming the game
+     * @param event event for resuming
+     * @throws Exception
+     */
     public void resumeGame(ActionEvent event) throws Exception {
        Stage window =  (Stage) unpause.getScene().getWindow();
        window.close();
+       play = true;
+
+    }
+
+    /**
+     * This method is for back button. To go back to user menu.
+     * @param event
+     * @throws Exception
+     */
+    public void goToUserMenu(ActionEvent event) throws  Exception {
+        Stage window = (Stage) exitGame.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserMenu.fxml"));
+        Parent root = (Parent) loader.load();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        UserMenuController userMenuController = new UserMenuController();
+        userMenuController = loader.getController();
+        System.out.println(player.getName());
+        userMenuController.setPlayer(player);
+        userMenuController.setMusic(music);
+        userMenuController.setAudioEffect(gameAudio);
+        userMenuController.setCurrentMode(currentMode);
+
+        gameStage.setScene(new Scene(root));
+        stage.close();
+
 
 
 
     }
 
+    /**
+     * This method creates all the frame modes and instances of the game
+     * @param event
+     * @throws Exception
+     */
     public void goingToPlay(ActionEvent event)throws Exception{
 //        System.out.println("From controller");
 //        Stage window;
@@ -141,6 +219,7 @@ public class GameController {
         shootDirection = new ArrayList<String>();
         enemyWeapons = new ArrayList<Weapon>();
         enemyWeaponsDirection = new ArrayList<String>();
+        play = true;
 
         direction = "down";
         enemyDirection = new ArrayList<String>();
@@ -150,7 +229,10 @@ public class GameController {
 
         humans = new ArrayList<Human>();
 
-        loadVillians();
+        if (currentMode.equals("Marvel Universe"))
+            loadVilliansMCU();
+        else
+            loadVilliansDCU();
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
@@ -236,6 +318,8 @@ public class GameController {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event){
+
+                shootAudio = new Audio(gameAudio, "src\\sample\\laser.mp3");//##
                 switch (event.getCode()) {
                     case UP:  {
                         if (!goNorth) {
@@ -282,17 +366,18 @@ public class GameController {
                     } break;
 //                    case SHIFT: running = true; break;
                     case Z: {
-
+                        shootAudio.play();
                         if (weapons.size() < 6) {
                             System.out.println("Here");
                             Weapon temp = new Weapon();
                             temp.setImage(setImage(player.getCurrentWeapon().getName() + ".gif"));
                             shootDirection.add(direction);
-                            temp.setLayoutY(heroY + 30);
+                            temp.setLayoutY(heroY + 15);
                             temp.setLayoutX(heroX);
                             temp.setVisible(true);
                             weapons.add(temp);
                             dungeon.getChildren().add(weapons.get(weapons.size() - 1));
+                            play = false;
 //                        weapon.setLayoutY(heroY + 30);
 //                        weapon.setLayoutX(heroX);
 //                        weapon.setVisible(true);
@@ -436,8 +521,10 @@ public class GameController {
     }
 
 
-
-
+    /**
+     * This is game over pop-up
+     * @throws Exception
+     */
     public void gameOver() throws Exception {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
             Parent root = loader.load();
@@ -446,9 +533,17 @@ public class GameController {
             gameOverController.setPlayer(player);
             gameOverController.setScore(score);
             gameOverController.setScoreLabel(score);
+            gameOverController.setCurrentMode(currentMode);
+            gameOverController.setMusic(music);
+            gameOverController.setGameAudio(gameAudio);
             gameStage.setScene(new Scene(root));
     }
 
+    /**
+     * This moves the player by dx, dy
+     * @param dx
+     * @param dy
+     */
     private void moveHeroBy(int dx, int dy) {
         if (dx == 0 && dy == 0) return;
 
@@ -461,6 +556,11 @@ public class GameController {
         moveHeroTo(x, y);
     }
 
+    /**
+     * This method moves the hero to the given coordinate
+     * @param x xpos
+     * @param y ypos
+     */
     private void moveHeroTo(double x, double y) {
         final double cx = hero.getBoundsInLocal().getWidth()  / 2;
         final double cy = hero.getBoundsInLocal().getHeight() / 2;
@@ -475,6 +575,11 @@ public class GameController {
         }
     }
 
+    /**
+     * This takes the image and removes the exception from it
+     * @param image
+     * @return
+     */
     private Image setImage(String image) {
         Image img = null;
         String name = "src/sample/gameSprites/" + image;
@@ -486,6 +591,9 @@ public class GameController {
         return img;
     }
 
+    /**
+     * This initializes all the enemies
+     */
     public void spawnEnemies() {
         Random random = new Random();
         int rand_x = random.nextInt(2000);
@@ -495,13 +603,13 @@ public class GameController {
         int rand_y = random.nextInt(440);
 
         Mob tempMob = new Mob();
-        if (score < 50) {
+        if (score < 20) {
             tempMob = mobs.get(0);
         }
-        if (score >= 50 && score <= 100) {
+        if (score >= 20 && score <= 50) {
             tempMob = mobs.get(1);
         }
-        if (score > 100 && score < 200) {
+        if (score > 50 && score < 150) {
             tempMob = mobs.get(2);
         }
 
@@ -599,6 +707,9 @@ public class GameController {
         }
     }
 
+    /**
+     * This makes the mob follow the user to kill
+     */
     public void followTheUser() {
        for (int i = 0; i < enemy.size(); i++) {
            if (enemy.get(i).getLayoutX() < heroX) {
@@ -645,11 +756,15 @@ public class GameController {
 
     }
 
+    /**
+     * This checks if collision happened
+     * @return
+     */
     public boolean collision(){
-
+        frizzAudio = new Audio(gameAudio, "src\\sample\\life.mp3");//#
         for (int i = 0; i < enemy.size(); i++) {
             for (int j = 0; j < weapons.size() ; j++) {
-                if ((weapons.get(j).getLayoutX() <= enemy.get(i).getLayoutX() + 70 && weapons.get(j).getLayoutX() >= enemy.get(i).getLayoutX()) && (weapons.get(j).getLayoutY() >= enemy.get(i).getLayoutY() && (weapons.get(j).getLayoutY() <= enemy.get(i).getLayoutY() + 100))) {
+                if ((weapons.get(j).getLayoutX() <= enemy.get(i).getLayoutX() + 35 && weapons.get(j).getLayoutX() >= enemy.get(i).getLayoutX()) && (weapons.get(j).getLayoutY() >= enemy.get(i).getLayoutY() && (weapons.get(j).getLayoutY() <= enemy.get(i).getLayoutY() + 50))) {
 //                    if (weapons.get(j).isVisible()) {
                         dungeon.getChildren().remove(enemy.get(i));
                         enemy.remove(i);
@@ -668,6 +783,7 @@ public class GameController {
                     dungeon.getChildren().remove(weapons.get(j));
                     weapons.remove(j);
                     shootDirection.remove(j);
+                    return false;
                 }
             }
             if (((heroX <= enemy.get(i).getLayoutX() + 10) && heroX >= enemy.get(i).getLayoutX() ) && (heroY >= enemy.get(i).getLayoutY() && (heroY <= enemy.get(i).getLayoutY() + 10))) {
@@ -677,6 +793,7 @@ public class GameController {
                 dungeonMini.getChildren().remove(enemyMini.get(i));
                 enemyMini.remove(i);
                 lives--;
+                frizzAudio.play();
                 if (lives == 0) {
                     dungeon.getChildren().removeAll(enemy);
                     enemy.removeAll(enemy);
@@ -694,6 +811,7 @@ public class GameController {
                 enemyWeapons.remove(i);
                 enemyWeaponsDirection.remove(i);
                 lives--;
+                frizzAudio.play();
                 if (lives == 0) {
                     dungeon.getChildren().removeAll(enemy);
                     enemy.removeAll(enemy);
@@ -701,9 +819,10 @@ public class GameController {
                     timer.stop();
                     return true;
                 }
+                return false;
             }
             for (int j = 0;  j < humans.size(); j++) {
-                if ((humans.get(j).getLayoutX() <= enemyWeapons.get(i).getLayoutX()  && humans.get(j).getLayoutX() >= enemyWeapons.get(i).getLayoutX() - 10) && (humans.get(j).getLayoutY() >=  enemyWeapons.get(i).getLayoutY() && humans.get(j).getLayoutY()<= enemyWeapons.get(i).getLayoutY() + 10)) {
+                if ((humans.get(j).getLayoutX() <= enemyWeapons.get(i).getLayoutX() + 20  && humans.get(j).getLayoutX() >= enemyWeapons.get(i).getLayoutX()) && (humans.get(j).getLayoutY() >=  enemyWeapons.get(i).getLayoutY() && humans.get(j).getLayoutY()<= enemyWeapons.get(i).getLayoutY() + 20)) {
                     dungeon.getChildren().remove(humans.get(j));
                     dungeon.getChildren().remove(enemyWeapons.get(i));
                     enemyWeapons.remove(i);
@@ -711,21 +830,24 @@ public class GameController {
                     enemyWeaponsDirection.remove(i);
                     if (score > 0)
                         score--;
+                    return false;
                 }
             }
             if (enemyWeapons.get(i).getLayoutY() < 0 || enemyWeapons.get(i).getLayoutX() > 2000 || enemyWeapons.get(i).getLayoutY() < 0 || enemyWeapons.get(i).getLayoutY() > 490) {
                 dungeon.getChildren().remove(enemyWeapons.get(i));
                 enemyWeapons.remove(i);
                 enemyWeaponsDirection.remove(i);
+                return false;
             }
             for (int j = 0; j < weapons.size(); j++) {
-                if (((weapons.get(j).getLayoutX() <= enemyWeapons.get(i).getLayoutX() + 20  && weapons.get(j).getLayoutX() >= enemyWeapons.get(i).getLayoutX()) && (weapons.get(j).getLayoutY() >=  enemyWeapons.get(i).getLayoutY() && weapons.get(j).getLayoutY()<= enemyWeapons.get(i).getLayoutY() + 10))) {
+                if (((weapons.get(j).getLayoutX() <= enemyWeapons.get(i).getLayoutX() + 20  && weapons.get(j).getLayoutX() >= enemyWeapons.get(i).getLayoutX()) && (weapons.get(j).getLayoutY() >=  enemyWeapons.get(i).getLayoutY() && weapons.get(j).getLayoutY()<= enemyWeapons.get(i).getLayoutY() + 20))) {
                     dungeon.getChildren().remove(enemyWeapons.get(i));
                     enemyWeapons.remove(i);
                     enemyWeaponsDirection.remove(i);
                     dungeon.getChildren().remove(weapons.get(j));
                     weapons.remove(j);
                     shootDirection.remove(j);
+                    return false;
                 }
             }
         }
@@ -816,7 +938,7 @@ public class GameController {
 
     }
 
-    public void loadVillians() {
+    public void loadVilliansMCU() {
         mobs = new ArrayList<Mob>();
         Weapon bullet = new Weapon(1, "Bullet", 0 );
         Weapon blueLaser = new Weapon(2, "Laser_Blue", 0);
@@ -830,6 +952,20 @@ public class GameController {
         mobs.add(redskull);
         mobs.add(ultronBlue);
         mobs.add(ultronRed);
+    }
+
+    public void loadVilliansDCU() {
+        mobs = new ArrayList<Mob>();
+        Weapon bullet = new Weapon(1, "Bullet", 0);
+        bullet.setImage(setImage(bullet.getName() + ".gif"));
+        Mob catWoman = new Mob("CW", 1, bullet);
+        Mob mrFitch = new Mob ("MF", 2, bullet);
+        Mob reverseFlash = new Mob("RF", 3, bullet);
+        Mob joker = new Mob("JK", 4, bullet);
+        mobs.add(catWoman);
+        mobs.add(mrFitch);
+        mobs.add(reverseFlash);
+        mobs.add(joker);
     }
 
 

@@ -29,11 +29,11 @@
                 <Image url="@icons/speaker.png" />
             </image>
         </ImageView>
-      <ImageView fx:id="mute" fitHeight="46.0" fitWidth="46.0" layoutX="27.0" layoutY="40.0" onMouseClicked="#muteTheAudio" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@icons/mute.png" />
-         </image>
-      </ImageView>
+        <ImageView fx:id="mute" fitHeight="46.0" fitWidth="46.0" layoutX="27.0" layoutY="40.0" onMouseClicked="#muteTheAudio" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@icons/mute.png" />
+            </image>
+        </ImageView>
         <Button fx:id="createProfile" alignment="TOP_LEFT" layoutX="130.0" layoutY="250.0" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="86.0" prefWidth="313.0" text="New Profile" textFill="#52545e">
             <font>
                 <Font name="Berlin Sans FB" size="37.0" />

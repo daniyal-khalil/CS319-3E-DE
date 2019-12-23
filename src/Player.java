@@ -103,22 +103,22 @@ public class Player
     {
         return highScore;
     }
-    
+
     public ArrayList<Character> getCharacters()
     {
         return characters;
     }
-    
+
     public void setCharacters(ArrayList<Character> characters)
     {
         this.characters = characters;
     }
-    
+
     public ArrayList<Weapon> getWeapons()
     {
         return weapons;
     }
-    
+
     public void setWeapons(ArrayList<Weapon> weapons)
     {
         this.weapons = weapons;
@@ -149,7 +149,7 @@ public class Player
         characters.add(character);
         return true;
     }
-    
+
     private void changeWeapon(int index)
     {
         if(0 <= index && index < weapons.size())
@@ -160,7 +160,7 @@ public class Player
             weapons.add(index, temp);
         }
     }
-    
+
     private void changeCharacter(int index)
     {
         if(0 <= index && index < characters.size())

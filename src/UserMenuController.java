@@ -35,51 +35,41 @@ public class UserMenuController {
     private Audio music;
     private Player player;
     @FXML
-    private Button newGame, store, modes, settings, back;
+    private Button newGame, store, modes, settings;
     @FXML
     Slider sound;
     @FXML
     Slider effects;
     @FXML
     private ListView<ImageView> images, images1;
+    @FXML
+    private ImageView backFromMenu;
     private ObservableList<ImageView> items, items1;
     private ImageView imageView, imageView1;
     ArrayList<String> informationsC;
     ArrayList<String> informationsW;
-    
-    //############################################
-    @FXML private ImageView modeJustice, modeMarvel ;//#
-    
 
+    private String currentMode;
+    @FXML private ImageView modeJustice, modeMarvel ;//#
     public void playGame(ActionEvent actionEvent) throws Exception {
-        music.pause();
+       // music.pause();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GamePanel.fxml"));
         Parent root = (Parent) loader.load();
         GameController gameController = new GameController();
         gameController = loader.getController();
         System.out.println(player.getName());
         gameController.setPlayer(player);
-        gameController.goingToPlay(actionEvent);
         gameController.setAudioEffect(gameAudio);
         gameController.setMusic(music);
+        gameController.setCurrentMode(currentMode);
+        gameController.goingToPlay(actionEvent);
+
         gameAudio.play();
 
     }
 
-    public void menuToStart(MouseEvent mouseEvent) throws IOException {
-        Stage window;
-        window = (Stage) back.getScene().getWindow();
-
-
-        FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
-        Parent root = (Parent) loader.load();
-
-        StartUpMenuController start = new StartUpMenuController();
-        start = loader.getController();
-        start = loader.getController();
-        start.setAudioEffect(gameAudio);
-        start.setMusic(music);
-        window.setScene(new Scene(root));
+    public void setCurrentMode(String currentMode) {
+        this.currentMode = currentMode;
     }
 
     public void popSettings(javafx.event.ActionEvent actionEvent) throws Exception
@@ -121,12 +111,28 @@ public class UserMenuController {
 
     }
 
+    public void menuToStart(MouseEvent mouseEvent) throws IOException {
+        Stage window;
+        window = (Stage) backFromMenu.getScene().getWindow();
+
+
+        FXMLLoader loader =new  FXMLLoader(getClass().getResource("StartUpMenu.fxml"));
+        Parent root = (Parent) loader.load();
+
+        StartUpMenuController start = new StartUpMenuController();
+        start = loader.getController();
+        start = loader.getController();
+        start.setAudioEffect(gameAudio);
+        start.setMusic(music);
+        window.setScene(new Scene(root));
+    }
+
 
     public void goingToModes(ActionEvent event)throws Exception{
 
         System.out.println("From controller");
         Stage window;
-        window = (Stage) modes.getScene().getWindow();
+        window = (Stage) backFromMenu.getScene().getWindow();
 
         //load fxml and set audios
         FXMLLoader loader =new  FXMLLoader(getClass().getResource("Modes.fxml"));
@@ -134,9 +140,10 @@ public class UserMenuController {
         ShopandModeController shop = new ShopandModeController();
         shop = loader.getController();
         shop.setAudioEffect(gameAudio);
-        shop.setPlayer(player);
         shop.setMusic(music);
-
+        shop.radioInitialize();
+        shop.setPlayer(player);
+        shop.setCurrentMode(currentMode);
         window.setScene(new Scene(root));
     }
 
@@ -160,6 +167,7 @@ public class UserMenuController {
         shop = loader.getController();
         shop.setAudioEffect(gameAudio);
         shop.setMusic(music);
+        shop.setCurrentMode(currentMode);
 
 //       Parent root = FXMLLoader.load(getClass().getResource("Shop.fxml"));
         images = new ListView<ImageView>();
@@ -171,23 +179,31 @@ public class UserMenuController {
 
         Image img = null;
         informationsC = new ArrayList<String>();
-        informationsC.add("captan america 0 \n price:100");
-        informationsC.add("captan america 1 \n price:100");
-        informationsC.add("captan america 2 \n price:100");
-        informationsC.add("captan america 3 \n price:100");
-        informationsC.add("captan america 4 \n price:100");
-        informationsC.add("captan america 5 \n price:100");
-        informationsC.add("captan america 6 \n price:100");
+        informationsC.add("BW  price:100");
+        informationsC.add("CM  price:100");
+        informationsC.add("HU  price:100");
+        informationsC.add("IM  price:100");
+        informationsC.add("SM  price:100");
+        informationsC.add("TH  price:100");
+        informationsC.add("CA  price:100");
         //System.out.println(informations.get(0));
         informationsW = new ArrayList<String>();
-        informationsW.add("weapon 0 \n power:1 \n price:100");
-        informationsW.add("weapon 1 \n power:1 \n price:100");
-        informationsW.add("weapon 2 \n power:1 \n price:100");
-        informationsW.add("weapon 3 \n power:1 \n price:100");
-
-
+        informationsW.add("Bullet \n power:1 \n price:100");
+        informationsW.add("Hammer \n power:1 \n price:100");
+        informationsW.add("IM_Laser \n power:1 \n price:100");
+        informationsW.add("shield \n power:1 \n price:100");
 
         File folder = new File("src/sample/storeC");
+        if(!currentMode.equals("Marvel Universe"))
+        {
+            folder = new File("src/sample/DC_characters_store");
+            informationsC.set(0, "AQ  price:100");
+            informationsC.set(1, "FL  price:100");
+            informationsC.set(2, "SM  price:100");
+            informationsC.set(3, "WW  price:100");
+            informationsC.set(4, "BT  price:100");
+        }
+
         if (!folder.exists()) folder.mkdir();
         for (File file : folder.listFiles()) {
             String filename = file.getPath();
@@ -195,7 +211,11 @@ public class UserMenuController {
             try
             {
                 img = new Image(new FileInputStream(filename));
-                imgs.add(new ImageView(img));
+                ImageView imageView = new ImageView(img);
+
+                imageView.setFitWidth(70);
+                imageView.setPreserveRatio(true);
+                imgs.add(imageView);
                 System.out.println("working");
             }
             catch (FileNotFoundException e)
@@ -207,8 +227,12 @@ public class UserMenuController {
         items = FXCollections.observableArrayList(imgs);
         //ShopandModeController shop = new  ShopandModeController(informations);
         ((ListView)root.lookup("#images")).setItems(items);
-
+        //((ListView)root.lookup("#images")).setPrefWidth(items.size() * 55);
         File folder1 = new File("src/sample/storeW");
+        if(!currentMode.equals("Marvel Universe"))
+        {
+            folder1 = new File("src/sample/DC_weapons_store");
+        }
         if (!folder1.exists()) folder1.mkdir();
         for (File file : folder1.listFiles()) {
             String filename = file.getPath();
@@ -231,7 +255,7 @@ public class UserMenuController {
         ((ListView)root.lookup("#images1")).setItems(items1);
         window.setScene(new Scene(root));
     }
-    
+
     //############################################
     public void setModeImage( String text ) throws FileNotFoundException {
         Image modeImage;
@@ -251,6 +275,7 @@ public class UserMenuController {
             modeJustice.setVisible(false);
         }
     }//#
+
 
     public void setMusic(Audio musicAudio) {
         System.out.println( "effect setted in user");

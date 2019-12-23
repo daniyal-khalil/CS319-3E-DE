@@ -1,6 +1,8 @@
 package sample;
 
-public class Character extends Object
+import javafx.scene.image.ImageView;
+
+public class Character extends ImageView
 {
     // constants
     private final static int LIVES = 3;
@@ -10,6 +12,9 @@ public class Character extends Object
     private int lives;
     private int price;
 
+    /**
+     * constructor
+     */
     public Character()
     {
         lives = LIVES;
@@ -17,6 +22,11 @@ public class Character extends Object
         price = -1;
     }
 
+    /**
+     * This is the constructor
+     * @param price Unused.
+     * @param name
+     */
     public Character(String name, int price)
     {
         lives = LIVES;
@@ -25,39 +35,56 @@ public class Character extends Object
     }
 
     // methods
-    public int getLive()
-    {
-        return lives;
-    }
 
+    /**
+     * setter for name
+     * @param name to be setted.
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+     * getter for name
+     * @return name .
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * getter for price
+     * @return name .
+     */
     public int getPrice()
     {
         return price;
     }
 
+    /**
+     * setter for price
+     * @param price to be setted.
+     */
     public void setPrice(int price)
     {
         this.price = price;
     }
 
-    public void dieOnce()
-    {
-        if(lives > 0)
-            lives--;
+    /**
+     * setter for lives
+     * @param lives to be setted.
+     */
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
-    public void resetLives()
-    {
-        lives = LIVES;
+    /**
+     * getter for lives
+     * @return live .
+     */
+    public int getLives() {
+        return lives;
     }
 }

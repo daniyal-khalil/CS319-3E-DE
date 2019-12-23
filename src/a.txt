@@ -1,72 +1,27 @@
-7983+ dan
-8951+ dan
-6480+ dan
-6367+ dan
-3416+ dan
-2925+ dan
-4987+ dan
-2427+ dan
-5765+ dan
-815+ dan
-5721+ dan
-5840+ dan
-7669+ dan
-5356+ dan
-6952+ dan
-8481+ dan
-4378+ dan
-3812+ dan
-7709+ dan
-527+ dan
-1978+ dan
-7836+ dan
-8108+ dan
-886+ dan
-8086+ dan
-8541+ dan
-2387+ dan
-2916+ dan
-8940+ dan
-8140+ dan
-5931+ dan
-8938+ dan
-3259+ dan
-9772+ dan
-8309+ dan
-8734+ cdan
-1713+ cdan
-9342+ dan
-2415+ Daniyal
-8371+ dan
-8817+ as
-4358+ a
-5441+ a
-7180+ a
-6940+ z
-3587+ z
-2301+ zx
-3100+ Da
-8575+ as
-3000+ Dan
-9807+ 
-5432+ 
-1013+ 
-9976+ 
-6181+ 
-6426+ 
-8820+ 
-6437+ 
-5507+ 
-3810+ 
-2341+ 
-858+ 
-7116+ 
-9864+ 
-6404+ 
-8177+ 
-5130+ 
-1224+ 
-3357+ 
-6793+ 
-8618+ 
-2221+ 
+<pl><UN>hhh<UN><cis>10000000<cis><cW><dm>0<dm><nm>Hammer<nm><pr>0<pr><cW><cCh><nm>HU<nm><pr>-1<pr><c
+Ch><hS>20<hS><Ws>|<dm>0<dm><nm>Bullet<nm><pr>0<pr>||<dm>0<dm><nm>Laser<nm><pr>0<pr>||<dm>1<dm><nm>sh
+ield<nm><pr>0<pr>||<dm>0<dm><nm>weapon<nm><pr>0<pr>||<dm>0<dm><nm>weapon<nm><pr>0<pr>||<dm>0<dm><nm>
+IM_Laser<nm><pr>0<pr>|<Ws><cs>|<nm>IM<nm><pr>-1<pr>||<nm>CA<nm><pr>0<pr>||<nm>TH<nm><pr>-1<pr>||<nm>
+AQ<nm><pr>-1<pr>|<cs><pl><pl><UN>xcvbnm,./<UN><cis>10000000<cis><cW><dm>0<dm><nm>weapon<nm><pr>0<pr>
+<cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>0<hS><Ws>|<dm>1<dm><nm>shield<nm><pr>0<pr>||<dm>0<dm><nm>Bullet
+<nm><pr>0<pr>|<Ws><cs>|<nm>IM<nm><pr>-1<pr>||<nm>HU<nm><pr>-1<pr>|<cs><pl><pl><UN>sdfg<UN><cis>10000
+000<cis><cW><dm>0<dm><nm>Bullet<nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>0<hS><Ws>|<dm>0<dm>
+<nm>Laser<nm><pr>0<pr>||<dm>1<dm><nm>shield<nm><pr>0<pr>|<Ws><cs>|<nm>BW<nm><pr>-1<pr>|<cs><pl><pl><
+UN>pppppppppppppppp<UN><cis>10000000<cis><cW><dm>0<dm><nm>Bullet<nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>
+0<pr><cCh><hS>2<hS><Ws>|<dm>1<dm><nm>shield<nm><pr>0<pr>||<dm>0<dm><nm>Laser<nm><pr>0<pr>||<dm>0<dm>
+<nm>weapon<nm><pr>0<pr>|<Ws><cs>|<nm>BW<nm><pr>-1<pr>|<cs><pl><pl><UN>ppppppppppppp<UN><cis>10000000
+<cis><cW><dm>0<dm><nm>Bullet<nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>0<hS><Ws>|<dm>1<dm><nm
+>shield<nm><pr>0<pr>|<Ws><cs><cs><pl><pl><UN>fvbnh<UN><cis>10000000<cis><cW><dm>1<dm><nm>shield<nm><
+pr>0<pr><cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>0<hS><Ws><Ws><cs><cs><pl><pl><UN>cvbnm<UN><cis>10000000
+<cis><cW><dm>1<dm><nm>shield<nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>7<hS><Ws><Ws><cs><cs><
+pl><pl><UN>ppppp<UN><cis>10000000<cis><cW><dm>1<dm><nm>shield<nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>0<p
+r><cCh><hS>0<hS><Ws><Ws><cs><cs><pl><pl><UN>vghbjnkml,<UN><cis>10000000<cis><cW><dm>1<dm><nm>shield<
+nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>0<hS><Ws><Ws><cs><cs><pl><pl><UN>cvbnmkl<UN><cis>10
+000000<cis><cW><dm>1<dm><nm>shield<nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>0<hS><Ws><Ws><cs
+><cs><pl><pl><UN>vbnm,pp<UN><cis>10000000<cis><cW><dm>0<dm><nm>Bullet<nm><pr>0<pr><cW><cCh><nm>IM<nm
+><pr>-1<pr><cCh><hS>0<hS><Ws>|<dm>1<dm><nm>shield<nm><pr>0<pr>||<dm>0<dm><nm>Bullet<nm><pr>0<pr>|<Ws
+><cs>|<nm>CA<nm><pr>0<pr>||<nm>FL<nm><pr>-1<pr>|<cs><pl><pl><UN>ddfeafSFasf<UN><cis>10000000<cis><cW
+><dm>1<dm><nm>shield<nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>0<hS><Ws><Ws><cs><cs><pl><pl><
+UN>dasdsada<UN><cis>10000000<cis><cW><dm>1<dm><nm>shield<nm><pr>0<pr><cW><cCh><nm>CA<nm><pr>0<pr><cC
+h><hS>0<hS><Ws><Ws><cs><cs><pl><pl><UN>fsdfs<UN><cis>10000000<cis><cW><dm>1<dm><nm>shield<nm><pr>0<p
+r><cW><cCh><nm>CA<nm><pr>0<pr><cCh><hS>0<hS><Ws><Ws><cs><cs><pl>

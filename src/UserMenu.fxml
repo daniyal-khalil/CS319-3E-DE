@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserMenuController">
     <children>
         <ImageView fitHeight="702.0" fitWidth="1127.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -39,16 +39,20 @@
                 <Font size="36.0" />
             </font>
         </Button>
-        <Button layoutX="940.0" layoutY="25.0" mnemonicParsing="false" text="back" />
         <ImageView fx:id="modeJustice" fitHeight="429.0" fitWidth="383.0" layoutX="584.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@images/justiceL.jpg" />
             </image>
         </ImageView>
-      <ImageView fx:id="modeMarvel" fitHeight="429.0" fitWidth="383.0" layoutX="584.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/userMenu.jpg" />
-         </image>
-      </ImageView>
+        <ImageView fx:id="modeMarvel" fitHeight="429.0" fitWidth="383.0" layoutX="584.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/userMenu.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="backFromMenu" fitHeight="79.0" fitWidth="31.0" layoutX="961.0" layoutY="23.0" onMousePressed="#menuToStart" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@icons/back.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>
