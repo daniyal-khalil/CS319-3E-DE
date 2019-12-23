@@ -180,28 +180,30 @@ public class UserMenuController {
         Image img = null;
         informationsC = new ArrayList<String>();
         informationsC.add("BW  price:100");
+        informationsC.add("CA  price:100");
         informationsC.add("CM  price:100");
         informationsC.add("HU  price:100");
         informationsC.add("IM  price:100");
         informationsC.add("SM  price:100");
         informationsC.add("TH  price:100");
-        informationsC.add("CA  price:100");
         //System.out.println(informations.get(0));
         informationsW = new ArrayList<String>();
         informationsW.add("Bullet \n power:1 \n price:100");
         informationsW.add("Hammer \n power:1 \n price:100");
         informationsW.add("IM_Laser \n power:1 \n price:100");
         informationsW.add("shield \n power:1 \n price:100");
+        informationsW.add("stone \n power:1 \n price:100");
+        informationsW.add("Web \n power:1 \n price:100");
 
         File folder = new File("src/sample/storeC");
         if(!currentMode.equals("Marvel Universe"))
         {
             folder = new File("src/sample/DC_characters_store");
             informationsC.set(0, "AQ  price:100");
-            informationsC.set(1, "FL  price:100");
-            informationsC.set(2, "SM  price:100");
-            informationsC.set(3, "WW  price:100");
-            informationsC.set(4, "BT  price:100");
+            informationsC.set(1, "BT  price:100");
+            informationsC.set(2, "FL  price:100");
+            informationsC.set(3, "SP  price:100");
+            informationsC.set(4, "WW  price:100");
         }
 
         if (!folder.exists()) folder.mkdir();
