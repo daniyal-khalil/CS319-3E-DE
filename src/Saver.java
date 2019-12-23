@@ -18,12 +18,17 @@ import java.io.*;
  * boolean setCurrentWeapon(String userName, Weapon w): returns false if the specified Weapon is not in the characters list.
  */
 public class Saver
-{    
+{
     // variables
     private final String fileName;
     private ProcessFile details;
 
     // constructors
+
+    /**
+     * This is the constructor for Saver class
+     * @param fileName This is the given path for storing/editing information
+     */
     public Saver(final String fileName)
     {
         this.fileName = fileName;
@@ -34,6 +39,13 @@ public class Saver
     }
 
     // methods
+
+    /**
+     * This is a private class that reads the contents of the file
+     * @param file given path for the text file
+     * @return This returns the content as a string
+     * @throws IOException In case the given path is not found
+     */
     private String readFile(String file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
@@ -48,11 +60,18 @@ public class Saver
         return fileAsString;
     }
 
+    /**
+     * This gives the user list
+     * @return user list as an ArrayList
+     */
     public ArrayList<Player> getUserList()
     {
         return details.getPlayerList();
     }
 
+    /**
+     * deletes all users
+     */
     public void deleteAll()
     {
         try {
@@ -65,6 +84,12 @@ public class Saver
         } catch (Exception e){}
     }
 
+
+    /**
+     * This method stores a new user to the file
+     * @param player this the player to be stored
+     * @return true if player is written successfully
+     */
     public boolean writeNewUser( Player player)
     {
         try
@@ -96,7 +121,14 @@ public class Saver
         } catch (Exception e){}
         return true;
     }
-    
+
+
+    /**
+     * This is the method is for encoding the player to the file,
+     * in a searchable/retrievable order.
+     * @param player player to be encoded
+     * @return String format of an encoded player
+     */
     private String encode(Player player)
     {
         String line = "<pl>";
@@ -134,12 +166,24 @@ public class Saver
         line = line + "<cs>" + "<pl>";
         return line;
     }
-    
+
+    /**
+     * This gives the player with the username-
+     * @param userName for searching the file
+     * @return player the is found in the file,
+     *         username = "undefined" if no player is found
+     */
     public Player getUser( String userName)
     {
         return details.getPlayer(userName);
     }
-    
+
+    /**
+     * This updates the score of the player
+     * @param userName for finding the player to be updated
+     * @param highScore a new highscore
+     * @return false if given highscore is less than the one already there
+     */
     public boolean updateScore(String userName, int highScore)
     {
         Player player = getUser(userName);
@@ -163,7 +207,13 @@ public class Saver
             return false;
         }
     }
-    
+
+    /**
+     * This adds a new character to the character list of the player
+     * @param userName for finding the player
+     * @param ch a new character
+     * @return false if no such user or if character already there
+     */
     public boolean addCharacter(String userName, Character ch)
     {
         Player player = getUser(userName);
@@ -191,7 +241,13 @@ public class Saver
         }
         return true;
     }
-    
+
+    /**
+     * This adds the weapon to the user
+     * @param userName to find the user
+     * @param w new weapon
+     * @return false if user doesn't exist or weapon already there
+     */
     public boolean addWeapon(String userName, Weapon w)
     {
         Player player = getUser(userName);
@@ -219,7 +275,13 @@ public class Saver
         }
         return true;
     }
-    
+
+    /**
+     * This sets coins for assigned user
+     * @param userName to find the user
+     * @param coins added coins
+     * @return false if no such user
+     */
     public boolean setCoins(String userName, int coins)
     {
         Player player = getUser(userName);
@@ -245,7 +307,13 @@ public class Saver
         }
         return true;
     }
-    
+
+    /**
+     * This sets new character to a given user
+     * @param userName to find the user
+     * @param ch new current character
+     * @return false if character is not in the characters list
+     */
     public boolean setCurrentCharacter(String userName, Character ch)
     {
         Player player = getUser(userName);
@@ -273,7 +341,14 @@ public class Saver
         }
         return true;
     }
-    
+
+    /**
+     * This sets a new current weapon
+     * @param userName to find the user
+     * @param ch weapon to assign as current
+     * @return false if the weapon is not available to the user
+     *         (if not in the weapons list)
+     */
     public boolean setCurrentWeapon(String userName, Weapon ch)
     {
         Player player = getUser(userName);
@@ -301,7 +376,11 @@ public class Saver
         }
         return true;
     }
-    
+
+    /**
+     * An inner class to process file and increase the efficiency of implementation-
+     * - by encapsulating certain methods
+     */
     private class ProcessFile
     {
         // variables
@@ -309,12 +388,23 @@ public class Saver
         private ArrayList<Player> list;
         
         // constructors
+
+        /**
+         * Constructor for content processing
+         * @param content
+         */
         public ProcessFile(String content)
         {
             this.content = content;
             list = processList();
         }
-        
+
+        /**
+         * This method changes the player with a new player
+         * @param userName to find the user
+         * @param newPlayer new Player to replace
+         * @return false if no such user
+         */
         public boolean changePlayer(String userName, Player newPlayer)
         {
             for(int i = 0; i < list.size(); i++)
@@ -328,26 +418,30 @@ public class Saver
             }
             return false;
         }
-        
+
+        /**
+         * This returns the content
+         * @return content
+         */
         public String getContent()
         {
             return content;
         }
-        
-        /*
-        public String separate(String userName)
-        {
-            int i = content.indexOf(userName) + userName.length();
-            int begin = i - 8;
-            int final_ = content.substring(i, content.length()).indexOf("<pl>");
-            return content.substring(begin, final_ + 4);
-        }
-        */
+
+        /**
+         * This gives the list of players
+         * @return
+         */
         public ArrayList<Player> getPlayerList()
         {
             return list;
         }
-        
+
+        /**
+         * adds a new player
+         * @param p player to be added
+         * @return false if no such user or p is undefined
+         */
         public boolean addPlayer(Player p)
         {
             if(p.getName().equals("undefined"))
@@ -357,7 +451,12 @@ public class Saver
             list.add(p);
             return true;
         }
-        
+
+        /**
+         * This finds the player with geiven username
+         * @param userName to find the player
+         * @return player that is found
+         */
         public Player getPlayer(String userName)
         {
             for(int i = 0; i < list.size(); i++)
@@ -367,7 +466,12 @@ public class Saver
             }
             return new Player();
         }
-        
+
+        /**
+         * This is used to break list into player list.
+         * Used in the constructor.
+         * @return list of players
+         */
         private ArrayList<Player> processList()
         {
             int i = 0;
@@ -390,7 +494,10 @@ public class Saver
             return list;
         }
     }
-    
+
+    /**
+     * This is an inner class for processing just one line (one player)
+     */
     private class ProcessLine
     {
         // variables
@@ -404,11 +511,20 @@ public class Saver
         private ArrayList<Character> characters;
         
         // constructors
+
+        /**
+         * This is a constructor for processing a single line
+         * @param line just one encoded line of a player ("<pl>...<pl>")
+         */
         public ProcessLine(String line)
         {
             this.line = line;
         }
-        
+
+        /**
+         * This is method for getting the player.
+         * @return player from the encoded line
+         */
         public Player getPlayer()
         {
             userName = getRelContent("<UN>", this.line);
@@ -440,7 +556,12 @@ public class Saver
             }
             return new Player(userName, coins, currentWeapon, currentCharacter, highScore, weapons, characters);
         }
-        
+
+        /**
+         * This method returns the list of players as strings
+         * @param listStr player list
+         * @return ArrayList of "<pl><pl>"
+         */
         private ArrayList<String> getList(String listStr)
         {
             String copy = listStr;
@@ -468,7 +589,13 @@ public class Saver
             }
             return list;
         }
-        
+
+        /**
+         * This returns the in-between content of the tags
+         * @param tag specified tag for the Player parameter
+         * @param ln given line
+         * @return return relative content
+         */
         private String getRelContent(String tag, String ln)
         {
             int i = 0, j;
