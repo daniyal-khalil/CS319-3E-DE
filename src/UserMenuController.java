@@ -46,6 +46,10 @@ public class UserMenuController {
     private ImageView imageView, imageView1;
     ArrayList<String> informationsC;
     ArrayList<String> informationsW;
+    
+    //############################################
+    @FXML private ImageView modeJustice, modeMarvel ;//#
+    
 
     public void playGame(ActionEvent actionEvent) throws Exception {
         music.pause();
@@ -227,6 +231,26 @@ public class UserMenuController {
         ((ListView)root.lookup("#images1")).setItems(items1);
         window.setScene(new Scene(root));
     }
+    
+    //############################################
+    public void setModeImage( String text ) throws FileNotFoundException {
+        Image modeImage;
+        System.out.println(text + "bal");
+        modeMarvel.setVisible(false);
+        modeJustice.setVisible(false);
+        if( text.equals("Justice League" ) )
+        {
+            System.out.println(text + "bal");
+            //modeJpg.setImage(new Image(new FileInputStream("src//sample//images//justiceL.jpg")));
+            modeJustice.setVisible(true);
+            modeMarvel.setVisible(false);
+        }
+        else
+        {
+            modeMarvel.setVisible(true);
+            modeJustice.setVisible(false);
+        }
+    }//#
 
     public void setMusic(Audio musicAudio) {
         System.out.println( "effect setted in user");
