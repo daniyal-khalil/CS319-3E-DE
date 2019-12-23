@@ -51,6 +51,12 @@ public class UserMenuController {
 
     private String currentMode;
     @FXML private ImageView modeJustice, modeMarvel ;//#
+    /**
+   * This is the main method which makes use of addNum method.
+   * @param actionEvent
+   * @return Nothing.
+   * @exception Exception On input error.
+   */
     public void playGame(ActionEvent actionEvent) throws Exception {
        // music.pause();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GamePanel.fxml"));
@@ -68,6 +74,11 @@ public class UserMenuController {
 
     }
 
+   /**
+   * transferring method
+   * @param currentMode
+   * @exception Exception On input error.
+   */
     public void setCurrentMode(String currentMode) {
         this.currentMode = currentMode;
     }
