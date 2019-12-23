@@ -2,7 +2,11 @@ package sample;
 
 import javafx.scene.image.ImageView;
 
-public class Weapon extends ImageView {
+/**
+ * This the class that stores weapons.
+ */
+public class Weapon extends ImageView
+{
     // variables
     private int damage;
     private String name;
@@ -10,6 +14,7 @@ public class Weapon extends ImageView {
 
 
     // constructors
+
     public Weapon()
     {
         damage = 0;
@@ -25,30 +30,55 @@ public class Weapon extends ImageView {
     }
 
     // methods
+
+    /**
+     * This returns the damage
+     * @return
+     */
     public int getDamage()
     {
         return damage;
     }
 
+    /**
+     * This sets the damage with a given damage level
+     * @param damage
+     */
     public void setDamage(int damage)
     {
         this.damage = damage;
     }
 
+    /**
+     * This sets the name with a given name
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * This gets you the name of the weapon
+     * @return weapon name
+     */
     public String getName()
     {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    /**
+     * This gives you the price for weapon
+     * @return price
+     */
     public int getPrice()
     {
         return price;
     }
 
+    /**
+     * This sets the price
+     * @param price
+     */
     public void setPrice(int price)
     {
         this.price = price;
