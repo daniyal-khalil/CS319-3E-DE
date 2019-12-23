@@ -34,6 +34,19 @@ public class Audio
         index = 0;
     }
 
+    public Audio( Audio audio, String url)
+    {
+
+        this.url = new ArrayList<String>();
+        this.url.add(url);
+        media = new Media(new File(this.url.get(0)).toURI().toString());
+        player = new MediaPlayer(media);
+        player.setVolume(audio.getVol());
+        isMuted = false;
+        index = 0;
+    }
+
+
     public Audio(ArrayList<String> url)
     {
         this.url = url;
@@ -43,10 +56,6 @@ public class Audio
             media = new Media(new File("src\\sample\\musicAbba.mp3").toURI().toString());
         player = new MediaPlayer(media);
         index = 0;
-    }
-
-    public void getUrl() {
-        System.out.println(url.get(0));
     }
 
     public boolean getIsMuted()
@@ -155,4 +164,10 @@ public class Audio
             player.play();
         }
     }
+
+    public ArrayList<String> getUrl()
+    {
+        return url;
+    }
+
 }
